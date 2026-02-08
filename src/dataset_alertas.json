@@ -1,0 +1,4402 @@
+[
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-59a208d8",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:02.490192",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Minor",
+          "certainty": "Observed",
+          "headline": "Calidad del aire aceptable",
+          "description": "Niveles normales de CO2.",
+          "instruction": "Ventilación natural recomendada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "707"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Desactivada"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-dd3e9089",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:02.591051",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Moderate",
+          "certainty": "Observed",
+          "headline": "Precaución: CO2 elevado",
+          "description": "Concentración superior a 1000 ppm.",
+          "instruction": "Abra ventanas o active ventilación forzada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1034"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Baja)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-34537a7a",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:02.691771",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Moderate",
+          "certainty": "Observed",
+          "headline": "Precaución: CO2 elevado",
+          "description": "Concentración superior a 1000 ppm.",
+          "instruction": "Abra ventanas o active ventilación forzada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1139"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Baja)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-2d135495",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:02.792246",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Minor",
+          "certainty": "Observed",
+          "headline": "Calidad del aire aceptable",
+          "description": "Niveles normales de CO2.",
+          "instruction": "Ventilación natural recomendada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "499"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Desactivada"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-2b388448",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:02.892813",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "2486"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-d52e6736",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:02.993208",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "2487"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-7a2d5b57",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:03.093591",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Moderate",
+          "certainty": "Observed",
+          "headline": "Precaución: CO2 elevado",
+          "description": "Concentración superior a 1000 ppm.",
+          "instruction": "Abra ventanas o active ventilación forzada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1158"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Baja)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-2f03815b",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:03.194536",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Moderate",
+          "certainty": "Observed",
+          "headline": "Precaución: CO2 elevado",
+          "description": "Concentración superior a 1000 ppm.",
+          "instruction": "Abra ventanas o active ventilación forzada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1150"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Baja)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-620832d3",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:03.295438",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Minor",
+          "certainty": "Observed",
+          "headline": "Calidad del aire aceptable",
+          "description": "Niveles normales de CO2.",
+          "instruction": "Ventilación natural recomendada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "611"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Desactivada"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-a9220762",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:03.395853",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1593"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-f12b6c08",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:03.496466",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Moderate",
+          "certainty": "Observed",
+          "headline": "Precaución: CO2 elevado",
+          "description": "Concentración superior a 1000 ppm.",
+          "instruction": "Abra ventanas o active ventilación forzada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1335"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Baja)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-4f4a3476",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:03.597101",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Minor",
+          "certainty": "Observed",
+          "headline": "Calidad del aire aceptable",
+          "description": "Niveles normales de CO2.",
+          "instruction": "Ventilación natural recomendada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "983"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Desactivada"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-85862e1b",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:03.697990",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1963"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-80b2b025",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:03.798339",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "2434"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-d2146c79",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:03.899251",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1901"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-098b2e6e",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:03.999965",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Minor",
+          "certainty": "Observed",
+          "headline": "Calidad del aire aceptable",
+          "description": "Niveles normales de CO2.",
+          "instruction": "Ventilación natural recomendada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "683"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Desactivada"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-63342981",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:04.100765",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "2126"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-9c9c383b",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:04.201245",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Moderate",
+          "certainty": "Observed",
+          "headline": "Precaución: CO2 elevado",
+          "description": "Concentración superior a 1000 ppm.",
+          "instruction": "Abra ventanas o active ventilación forzada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1377"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Baja)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-aabf010c",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:04.301814",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1975"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-8a7cf259",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:04.402464",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Minor",
+          "certainty": "Observed",
+          "headline": "Calidad del aire aceptable",
+          "description": "Niveles normales de CO2.",
+          "instruction": "Ventilación natural recomendada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "589"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Desactivada"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-bb9788d7",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:04.503171",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Moderate",
+          "certainty": "Observed",
+          "headline": "Precaución: CO2 elevado",
+          "description": "Concentración superior a 1000 ppm.",
+          "instruction": "Abra ventanas o active ventilación forzada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1314"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Baja)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-86a6a099",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:04.603727",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1942"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-4a9d126a",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:04.704497",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "2179"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-4cb3f11f",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:04.804888",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "2455"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-b67d3e22",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:04.905531",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Minor",
+          "certainty": "Observed",
+          "headline": "Calidad del aire aceptable",
+          "description": "Niveles normales de CO2.",
+          "instruction": "Ventilación natural recomendada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "744"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Desactivada"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-ef66678d",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:05.006457",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1575"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-af553c4f",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:05.106931",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Minor",
+          "certainty": "Observed",
+          "headline": "Calidad del aire aceptable",
+          "description": "Niveles normales de CO2.",
+          "instruction": "Ventilación natural recomendada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "410"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Desactivada"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-f3f86ec1",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:05.207471",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Minor",
+          "certainty": "Observed",
+          "headline": "Calidad del aire aceptable",
+          "description": "Niveles normales de CO2.",
+          "instruction": "Ventilación natural recomendada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "980"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Desactivada"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-1a500b6b",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:05.308280",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Moderate",
+          "certainty": "Observed",
+          "headline": "Precaución: CO2 elevado",
+          "description": "Concentración superior a 1000 ppm.",
+          "instruction": "Abra ventanas o active ventilación forzada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1319"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Baja)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-6149f01d",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:05.409447",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Moderate",
+          "certainty": "Observed",
+          "headline": "Precaución: CO2 elevado",
+          "description": "Concentración superior a 1000 ppm.",
+          "instruction": "Abra ventanas o active ventilación forzada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1191"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Baja)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-2ce88959",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:05.510885",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Moderate",
+          "certainty": "Observed",
+          "headline": "Precaución: CO2 elevado",
+          "description": "Concentración superior a 1000 ppm.",
+          "instruction": "Abra ventanas o active ventilación forzada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1425"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Baja)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-a65fc217",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:05.611504",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "2340"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-5f5dbb53",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:05.712297",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Moderate",
+          "certainty": "Observed",
+          "headline": "Precaución: CO2 elevado",
+          "description": "Concentración superior a 1000 ppm.",
+          "instruction": "Abra ventanas o active ventilación forzada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1071"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Baja)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-8957e52b",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:05.813497",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Minor",
+          "certainty": "Observed",
+          "headline": "Calidad del aire aceptable",
+          "description": "Niveles normales de CO2.",
+          "instruction": "Ventilación natural recomendada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "699"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Desactivada"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-1ab04a0f",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:05.914105",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "2383"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-86f2e2f1",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:06.014767",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Minor",
+          "certainty": "Observed",
+          "headline": "Calidad del aire aceptable",
+          "description": "Niveles normales de CO2.",
+          "instruction": "Ventilación natural recomendada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "914"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Desactivada"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-6438dd1c",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:06.115751",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Moderate",
+          "certainty": "Observed",
+          "headline": "Precaución: CO2 elevado",
+          "description": "Concentración superior a 1000 ppm.",
+          "instruction": "Abra ventanas o active ventilación forzada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1456"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Baja)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-af4fe1f3",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:06.216521",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Minor",
+          "certainty": "Observed",
+          "headline": "Calidad del aire aceptable",
+          "description": "Niveles normales de CO2.",
+          "instruction": "Ventilación natural recomendada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "445"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Desactivada"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-faa63eeb",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:06.317313",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Minor",
+          "certainty": "Observed",
+          "headline": "Calidad del aire aceptable",
+          "description": "Niveles normales de CO2.",
+          "instruction": "Ventilación natural recomendada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "411"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Desactivada"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-ed595b57",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:06.418366",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "2372"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-c13991a6",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:06.520615",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Minor",
+          "certainty": "Observed",
+          "headline": "Calidad del aire aceptable",
+          "description": "Niveles normales de CO2.",
+          "instruction": "Ventilación natural recomendada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "511"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Desactivada"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-1d23433d",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:06.621441",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1636"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-bc9b3dbf",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:06.722139",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Minor",
+          "certainty": "Observed",
+          "headline": "Calidad del aire aceptable",
+          "description": "Niveles normales de CO2.",
+          "instruction": "Ventilación natural recomendada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "539"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Desactivada"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-d3b9ce57",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:06.822667",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Minor",
+          "certainty": "Observed",
+          "headline": "Calidad del aire aceptable",
+          "description": "Niveles normales de CO2.",
+          "instruction": "Ventilación natural recomendada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "864"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Desactivada"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-439036e3",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:06.923092",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1607"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-2b2d2b6e",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:07.023594",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Minor",
+          "certainty": "Observed",
+          "headline": "Calidad del aire aceptable",
+          "description": "Niveles normales de CO2.",
+          "instruction": "Ventilación natural recomendada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "473"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Desactivada"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-23aa1fe5",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:07.125731",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Moderate",
+          "certainty": "Observed",
+          "headline": "Precaución: CO2 elevado",
+          "description": "Concentración superior a 1000 ppm.",
+          "instruction": "Abra ventanas o active ventilación forzada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1122"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Baja)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-023de754",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:07.226783",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Moderate",
+          "certainty": "Observed",
+          "headline": "Precaución: CO2 elevado",
+          "description": "Concentración superior a 1000 ppm.",
+          "instruction": "Abra ventanas o active ventilación forzada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1089"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Baja)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-2b07bf12",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:07.327497",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "2273"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-1fd60bf1",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:07.428326",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "2473"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-c1811f48",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:07.529218",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Minor",
+          "certainty": "Observed",
+          "headline": "Calidad del aire aceptable",
+          "description": "Niveles normales de CO2.",
+          "instruction": "Ventilación natural recomendada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "720"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Desactivada"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-82490539",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:07.630080",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Minor",
+          "certainty": "Observed",
+          "headline": "Calidad del aire aceptable",
+          "description": "Niveles normales de CO2.",
+          "instruction": "Ventilación natural recomendada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "885"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Desactivada"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-353c6d36",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:07.730976",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "2438"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-b9a4f7da",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:07.832816",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1991"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-0d074599",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:07.933633",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "2080"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-79b18cbb",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:08.034312",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Moderate",
+          "certainty": "Observed",
+          "headline": "Precaución: CO2 elevado",
+          "description": "Concentración superior a 1000 ppm.",
+          "instruction": "Abra ventanas o active ventilación forzada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1408"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Baja)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-b150f8ff",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:08.136058",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1972"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-a9e86f01",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:08.236746",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Moderate",
+          "certainty": "Observed",
+          "headline": "Precaución: CO2 elevado",
+          "description": "Concentración superior a 1000 ppm.",
+          "instruction": "Abra ventanas o active ventilación forzada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1015"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Baja)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-419bb8b3",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:08.337703",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "2229"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-622f6501",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:08.438662",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1519"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-dfafbb33",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:08.539336",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Moderate",
+          "certainty": "Observed",
+          "headline": "Precaución: CO2 elevado",
+          "description": "Concentración superior a 1000 ppm.",
+          "instruction": "Abra ventanas o active ventilación forzada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1166"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Baja)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-b7269e50",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:08.640065",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Minor",
+          "certainty": "Observed",
+          "headline": "Calidad del aire aceptable",
+          "description": "Niveles normales de CO2.",
+          "instruction": "Ventilación natural recomendada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "532"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Desactivada"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-c4caa749",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:08.740438",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Minor",
+          "certainty": "Observed",
+          "headline": "Calidad del aire aceptable",
+          "description": "Niveles normales de CO2.",
+          "instruction": "Ventilación natural recomendada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "539"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Desactivada"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-88c8ca59",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:08.841945",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "2273"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-5e431b98",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:08.943121",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1543"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-b1d79db1",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:09.044851",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1949"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-0a422ecd",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:09.145645",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "2465"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-703eb03c",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:09.246641",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Minor",
+          "certainty": "Observed",
+          "headline": "Calidad del aire aceptable",
+          "description": "Niveles normales de CO2.",
+          "instruction": "Ventilación natural recomendada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "803"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Desactivada"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-c8e7a449",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:09.347459",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1568"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-9fff0abc",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:09.449567",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Moderate",
+          "certainty": "Observed",
+          "headline": "Precaución: CO2 elevado",
+          "description": "Concentración superior a 1000 ppm.",
+          "instruction": "Abra ventanas o active ventilación forzada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1100"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Baja)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-5c1cfda3",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:09.550444",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "2271"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-cb136541",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:09.651101",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Moderate",
+          "certainty": "Observed",
+          "headline": "Precaución: CO2 elevado",
+          "description": "Concentración superior a 1000 ppm.",
+          "instruction": "Abra ventanas o active ventilación forzada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1344"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Baja)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-b3821078",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:09.751994",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "2281"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-9167dca0",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:09.852696",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Moderate",
+          "certainty": "Observed",
+          "headline": "Precaución: CO2 elevado",
+          "description": "Concentración superior a 1000 ppm.",
+          "instruction": "Abra ventanas o active ventilación forzada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1228"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Baja)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-30891f97",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:09.953505",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1841"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-93662d8f",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:10.054087",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Moderate",
+          "certainty": "Observed",
+          "headline": "Precaución: CO2 elevado",
+          "description": "Concentración superior a 1000 ppm.",
+          "instruction": "Abra ventanas o active ventilación forzada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1193"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Baja)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-f94ee320",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:10.155127",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1978"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-a6fe9ba7",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:10.256425",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "2061"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-eb3844dc",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:10.357793",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "2100"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-f14ab7c0",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:10.458326",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Moderate",
+          "certainty": "Observed",
+          "headline": "Precaución: CO2 elevado",
+          "description": "Concentración superior a 1000 ppm.",
+          "instruction": "Abra ventanas o active ventilación forzada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1236"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Baja)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-f6b17baf",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:10.559362",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "2263"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-3a48654f",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:10.659979",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1569"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-1180225f",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:10.760462",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Minor",
+          "certainty": "Observed",
+          "headline": "Calidad del aire aceptable",
+          "description": "Niveles normales de CO2.",
+          "instruction": "Ventilación natural recomendada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "790"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Desactivada"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-bfd61ffe",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:10.863001",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Moderate",
+          "certainty": "Observed",
+          "headline": "Precaución: CO2 elevado",
+          "description": "Concentración superior a 1000 ppm.",
+          "instruction": "Abra ventanas o active ventilación forzada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1342"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Baja)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-56df876c",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:10.963761",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Minor",
+          "certainty": "Observed",
+          "headline": "Calidad del aire aceptable",
+          "description": "Niveles normales de CO2.",
+          "instruction": "Ventilación natural recomendada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "454"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Desactivada"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-71e8289f",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:11.064846",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Minor",
+          "certainty": "Observed",
+          "headline": "Calidad del aire aceptable",
+          "description": "Niveles normales de CO2.",
+          "instruction": "Ventilación natural recomendada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "777"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Desactivada"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-e0af42fe",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:11.166000",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Minor",
+          "certainty": "Observed",
+          "headline": "Calidad del aire aceptable",
+          "description": "Niveles normales de CO2.",
+          "instruction": "Ventilación natural recomendada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "697"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Desactivada"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-0da4f19d",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:11.266814",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1670"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-4f90b0ae",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:11.367683",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1544"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-cc32d587",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:11.468317",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Minor",
+          "certainty": "Observed",
+          "headline": "Calidad del aire aceptable",
+          "description": "Niveles normales de CO2.",
+          "instruction": "Ventilación natural recomendada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "482"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Desactivada"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-812e2118",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:11.569873",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1617"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-7d0ef390",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:11.670625",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Minor",
+          "certainty": "Observed",
+          "headline": "Calidad del aire aceptable",
+          "description": "Niveles normales de CO2.",
+          "instruction": "Ventilación natural recomendada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "992"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Desactivada"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-5077cae2",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:11.771045",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Moderate",
+          "certainty": "Observed",
+          "headline": "Precaución: CO2 elevado",
+          "description": "Concentración superior a 1000 ppm.",
+          "instruction": "Abra ventanas o active ventilación forzada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1135"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Baja)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-a08b0f3e",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:11.871786",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1522"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-f5a9e0f3",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:11.972896",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Minor",
+          "certainty": "Observed",
+          "headline": "Calidad del aire aceptable",
+          "description": "Niveles normales de CO2.",
+          "instruction": "Ventilación natural recomendada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "939"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Desactivada"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-341a3a43",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:12.073743",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1809"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-21b2646f",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:12.174677",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Moderate",
+          "certainty": "Observed",
+          "headline": "Precaución: CO2 elevado",
+          "description": "Concentración superior a 1000 ppm.",
+          "instruction": "Abra ventanas o active ventilación forzada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1405"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Baja)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-b113704d",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:12.275623",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "1948"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-9e9a568f",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:12.377133",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Minor",
+          "certainty": "Observed",
+          "headline": "Calidad del aire aceptable",
+          "description": "Niveles normales de CO2.",
+          "instruction": "Ventilación natural recomendada.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "641"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Desactivada"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "alert": {
+      "identifier": "ES-MAD-CO2-c56b8b66",
+      "sender": "sensor-tfg@uni.example.es",
+      "sent": "2026-02-08T21:43:12.477845",
+      "status": "Actual",
+      "msgType": "Alert",
+      "scope": "Public",
+      "info": [
+        {
+          "language": "es-ES",
+          "category": [
+            "Safety",
+            "Env"
+          ],
+          "event": "Monitorización de CO2",
+          "urgency": "Immediate",
+          "severity": "Severe",
+          "certainty": "Observed",
+          "headline": "PELIGRO: Evacuar zona por CO2",
+          "description": "Concentración peligrosa detectada.",
+          "instruction": "Evacúe inmediatamente el área.",
+          "parameter": [
+            {
+              "valueName": "hazard",
+              "value": "CO2"
+            },
+            {
+              "valueName": "reading",
+              "value": "2116"
+            },
+            {
+              "valueName": "readingUnit",
+              "value": "ppm"
+            },
+            {
+              "valueName": "ventilationStatus",
+              "value": "Activada (Máxima)"
+            }
+          ]
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RETIMF - Multi-Hazard Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .pulse-red { animation: pulseRed 2s infinite; }
+        @keyframes pulseRed { 
+            0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); }
+            70% { box-shadow: 0 0 0 20px rgba(220, 38, 38, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+        }
+        /* Animación para cuando entra un item nuevo al historial */
+        .slide-in { animation: slideIn 0.5s ease-out; }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+    </style>
+</head>
+<body class="bg-[#e9e9e9] text-slate-800 min-h-screen flex flex-col transition-colors duration-700" id="main-body">
+
+    <header class="bg-white border-b-2 border-black/10 px-6 py-4 flex justify-between items-center shadow-sm z-20 sticky top-0">
+        <div class="flex items-center gap-4">
+            <div class="bg-slate-900 text-white font-black px-3 py-1 text-xl tracking-tighter rounded">RETIMF</div>
+            <div class="leading-tight border-l-2 border-gray-300 pl-4">
+                <h1 class="text-xl font-bold text-slate-900 tracking-tight">EMERGENCY HUB</h1>
+                <p class="text-xs text-gray-500 font-semibold uppercase tracking-widest">Central Monitoring Unit</p>
+            </div>
+        </div>
+        <div class="text-right">
+            <div id="clock" class="text-2xl font-bold font-mono text-slate-700">--:--</div>
+            <div class="flex items-center justify-end gap-2 text-xs font-bold text-gray-400 uppercase">
+                <span id="conn-dot" class="w-2 h-2 rounded-full bg-red-500"></span>
+                <span id="conn-text">Offline</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-1 max-w-7xl mx-auto w-full p-6 flex flex-col gap-6">
+
+        <section id="alert-card" class="bg-white rounded-3xl border border-gray-200 shadow-xl overflow-hidden flex flex-col md:flex-row transition-all duration-500 transform">
+            <div id="alert-side-color" class="w-full md:w-4 bg-gray-300 transition-colors duration-500"></div>
+            
+            <div class="p-8 flex-1 flex flex-col md:flex-row items-center gap-8">
+                <div class="flex-shrink-0">
+                    <div id="alert-icon-bg" class="w-28 h-28 rounded-full bg-gray-100 flex items-center justify-center text-6xl shadow-inner transition-colors duration-500">
+                        📡
+                    </div>
+                </div>
+
+                <div class="flex-1 text-center md:text-left">
+                    <div class="flex items-center gap-3 mb-2 justify-center md:justify-start">
+                        <span id="alert-badge" class="px-3 py-1 rounded-full bg-gray-200 text-gray-600 text-xs font-bold uppercase tracking-wider">ESPERANDO</span>
+                    </div>
+                    <h2 id="headline" class="text-5xl font-black leading-none text-slate-900 mb-4 uppercase tracking-tight">SISTEMA INICIADO</h2>
+                    <p id="instruction" class="text-2xl text-slate-700 font-bold border-l-4 border-slate-300 pl-4">Esperando conexión MQTT...</p>
+                </div>
+
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 text-center min-w-[160px]">
+                    <p class="text-xs text-gray-500 uppercase font-bold mb-1">Lectura</p>
+                    <p id="sensor-val" class="text-5xl font-black text-slate-800 font-mono">--</p>
+                    <p id="sensor-unit" class="text-sm text-gray-400 font-bold">--</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            
+            <section class="lg:col-span-2 bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
+                <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+                    <span class="bg-blue-100 text-blue-600 p-1 rounded">🛡️</span> Detalles del Evento
+                </h3>
+                <p id="description" class="text-lg text-gray-600 mb-6">No hay información disponible.</p>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 opacity-60">
+                    <div class="bg-gray-50 p-3 rounded-lg text-center border"><span class="block text-2xl">📢</span><span class="text-xs font-bold">AVISAR</span></div>
+                    <div class="bg-gray-50 p-3 rounded-lg text-center border"><span class="block text-2xl">🚒</span><span class="text-xs font-bold">112</span></div>
+                    <div class="bg-gray-50 p-3 rounded-lg text-center border"><span class="block text-2xl">🚪</span><span class="text-xs font-bold">SALIDAS</span></div>
+                    <div class="bg-gray-50 p-3 rounded-lg text-center border"><span class="block text-2xl">🔋</span><span class="text-xs font-bold">ENERGÍA</span></div>
+                </div>
+            </section>
+
+            <div class="flex flex-col gap-6">
+                <section class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 flex-1 h-[300px] overflow-hidden flex flex-col">
+                    <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+                        <span class="bg-yellow-100 text-yellow-600 p-1 rounded">📜</span> Historial Reciente
+                    </h3>
+                    
+                    <div id="history-container" class="space-y-3 overflow-y-auto pr-2">
+                        <div class="text-center text-gray-400 text-sm py-4 italic">Historial vacío...</div>
+                    </div>
+                </section>
+
+                <button class="bg-red-600 text-white rounded-2xl p-4 shadow-lg flex items-center justify-between hover:scale-[1.02] transition-transform">
+                    <div>
+                        <p class="text-xs font-bold uppercase text-red-100 opacity-80">Emergency SOS</p>
+                        <p class="text-3xl font-black">112 / 911</p>
+                    </div>
+                    <div class="text-3xl">📞</div>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // RELOJ
+        setInterval(() => {
+            document.getElementById('clock').innerText = new Date().toLocaleTimeString('es-ES', {hour:'2-digit', minute:'2-digit'});
+        }, 1000);
+
+        // MQTT
+        const client = new Paho.MQTT.Client("localhost", 9001, "Web_Client_" + Math.random().toString(16).substr(2,8));
+
+        client.onConnectionLost = (res) => {
+            document.getElementById("conn-dot").className = "w-2 h-2 rounded-full bg-red-500";
+            document.getElementById("conn-text").innerText = "OFFLINE";
+        };
+
+        client.onMessageArrived = (msg) => {
+            const payload = JSON.parse(msg.payloadString);
+            const info = payload.alert.info[0];
+            
+            // 1. Añadir al historial ANTES de actualizar la pantalla principal
+            addToHistory(info);
+            
+            // 2. Actualizar pantalla principal
+            updateDashboard(info);
+        };
+
+        client.connect({
+            onSuccess: () => {
+                document.getElementById("conn-dot").className = "w-2 h-2 rounded-full bg-green-500 animate-pulse";
+                document.getElementById("conn-text").innerText = "ONLINE";
+                client.subscribe("totem/alertas");
+            }
+        });
+
+        // --- FUNCIÓN HISTORIAL (NUEVA) ---
+        function addToHistory(info) {
+            const container = document.getElementById("history-container");
+            const time = new Date().toLocaleTimeString('es-ES', {hour:'2-digit', minute:'2-digit', second:'2-digit'});
+            
+            // Si dice "Historial vacío", lo borramos
+            if (container.children[0] && container.children[0].innerText.includes("vacío")) {
+                container.innerHTML = "";
+            }
+
+            // Color del borde según severidad
+            let borderColor = "border-gray-200";
+            if (info.severity === "Severe") borderColor = "border-red-500";
+            if (info.severity === "Moderate") borderColor = "border-yellow-400";
+            if (info.severity === "Minor") borderColor = "border-green-500";
+
+            // Crear el HTML del item
+            const itemHTML = `
+                <div class="flex gap-3 items-start pl-3 border-l-4 ${borderColor} bg-gray-50 p-2 rounded slide-in">
+                    <div>
+                        <span class="text-[10px] font-mono text-gray-400 block">${time}</span>
+                        <h4 class="text-xs font-bold text-slate-800 uppercase leading-tight">${info.headline}</h4>
+                    </div>
+                </div>
+            `;
+
+            // Insertar al principio (Prepend)
+            container.insertAdjacentHTML('afterbegin', itemHTML);
+
+            // Limitar a 5 items para que no se llene infinito
+            if (container.children.length > 5) {
+                container.lastElementChild.remove();
+            }
+        }
+
+        function updateDashboard(info) {
+            const sev = info.severity;
+            const param = info.parameter[0]; // Coger el primer parámetro dinámico
+
+            // Textos
+            document.getElementById("headline").innerText = info.headline;
+            document.getElementById("description").innerText = info.description;
+            document.getElementById("instruction").innerText = info.instruction;
+            document.getElementById("sensor-val").innerText = param.value;
+            document.getElementById("sensor-unit").innerText = info.parameter[1]?.value || "";
+
+            // Estilos Dinámicos
+            const body = document.getElementById("main-body");
+            const card = document.getElementById("alert-card");
+            const side = document.getElementById("alert-side-color");
+            const iconBg = document.getElementById("alert-icon-bg");
+            const badge = document.getElementById("alert-badge");
+
+            body.classList.remove("bg-red-50", "bg-amber-50", "bg-blue-50", "bg-[#e9e9e9]");
+            card.classList.remove("pulse-red");
+
+            // ICONOS Y COLORES POR TIPO DE SEVERIDAD
+            if (sev === "Severe") {
+                body.classList.add("bg-red-50");
+                card.classList.add("pulse-red", "border-red-500");
+                side.className = "w-full md:w-4 bg-red-600";
+                iconBg.className = "w-28 h-28 rounded-full bg-red-100 text-red-600 flex items-center justify-center text-6xl shadow-inner";
+                iconBg.innerText = info.headline.includes("FUEGO") ? "🔥" : "🚨"; 
+                badge.className = "px-3 py-1 rounded-full bg-red-600 text-white text-xs font-bold uppercase tracking-wider animate-pulse";
+                badge.innerText = "PELIGRO";
+            } 
+            else if (sev === "Moderate") {
+                body.classList.add("bg-amber-50");
+                side.className = "w-full md:w-4 bg-yellow-400";
+                iconBg.className = "w-28 h-28 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center text-6xl shadow-inner";
+                iconBg.innerText = "⚠️"; 
+                badge.className = "px-3 py-1 rounded-full bg-yellow-400 text-yellow-900 text-xs font-bold uppercase tracking-wider";
+                badge.innerText = "ALERTA";
+            } 
+            else {
+                body.classList.add("bg-[#e9e9e9]");
+                side.className = "w-full md:w-4 bg-emerald-500";
+                iconBg.className = "w-28 h-28 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-6xl shadow-inner";
+                iconBg.innerText = "🛡️"; 
+                badge.className = "px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold uppercase tracking-wider";
+                badge.innerText = "NORMAL";
+            }
+        }
+    </script>
+</body>
+</html>
