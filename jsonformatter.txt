@@ -1,0 +1,67 @@
+{
+  "alert": {
+    "identifier": "ES-MAD-CO2-20260128-101500",
+    "sender": "alerts@madrid.example.es",
+    "sent": "2026-01-28T10:15:00+01:00",
+    "status": "Actual",
+    "msgType": "Alert",
+    "scope": "Public",
+    "info": [
+      {
+        "language": "es-ES",
+        "category": [
+          "Safety",
+          "Env"
+        ],
+        "event": "Fuga de dióxido de carbono (CO₂)",
+        "urgency": "Immediate",
+        "severity": "Severe",
+        "certainty": "Observed",
+        "senderName": "Centro de Coordinación de Emergencias (Ejemplo)",
+        "headline": "Peligro: concentración elevada de CO₂ en zona cerrada",
+        "description": "Se ha detectado una concentración peligrosa de CO₂ en un aparcamiento subterráneo. El CO₂ puede desplazar el oxígeno y provocar pérdida de consciencia. Evite la zona y siga las instrucciones del personal de emergencias.",
+        "instruction": "Evacúe inmediatamente el área indicada. No entre en espacios cerrados sin ventilación. Si alguien está inconsciente, no acceda sin protección y llame al 112.",
+        "contact": "112 (emergencias)",
+        "effective": "2026-01-28T10:15:00+01:00",
+        "onset": "2026-01-28T10:10:00+01:00",
+        "expires": "2026-01-28T13:15:00+01:00",
+        "parameter": [
+          {
+            "valueName": "hazard",
+            "value": "CO2"
+          },
+          {
+            "valueName": "reading",
+            "value": "45000"
+          },
+          {
+            "valueName": "readingUnit",
+            "value": "ppm"
+          },
+          {
+            "valueName": "sensorLocation",
+            "value": "Nivel -2, rampa este"
+          },
+          {
+            "valueName": "ventilationStatus",
+            "value": "Activada"
+          }
+        ],
+        "area": [
+          {
+            "areaDesc": "Aparcamiento subterráneo (radio aproximado 250 m)",
+            "circle": [
+              "40.416775,-3.703790 0.25"
+            ],
+            "geocode": [
+              {
+                "valueName": "ISO3166-1",
+                "value": "ES"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

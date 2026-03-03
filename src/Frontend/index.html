@@ -113,7 +113,7 @@
         }, 1000);
 
         // MQTT
-        const client = new Paho.MQTT.Client("localhost", 9001, "Web_Client_" + Math.random().toString(16).substr(2,8));
+        const client = new Paho.MQTT.Client("51.49.204.68", 9001, "Web_Client_" + Math.random().toString(16).substr(2,8));
 
         client.onConnectionLost = (res) => {
             document.getElementById("conn-dot").className = "w-2 h-2 rounded-full bg-red-500";

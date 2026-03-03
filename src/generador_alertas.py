@@ -6,7 +6,7 @@ import uuid
 from datetime import datetime
 
 # CONFIGURACIÓN
-BROKER = "127.0.0.1"
+BROKER = "51.49.204.68"
 PORT = 1883
 TOPIC = "totem/alertas"
 
