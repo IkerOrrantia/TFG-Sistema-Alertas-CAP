@@ -1,0 +1,250 @@
+---
+import '../styles/global.css';
+---
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RETIMF - Multi-Hazard Dashboard</title>
+    
+    <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .pulse-red { animation: pulseRed 2s infinite; }
+        @keyframes pulseRed { 
+            0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); }
+            70% { box-shadow: 0 0 0 20px rgba(220, 38, 38, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+        }
+        .slide-in { animation: slideIn 0.5s ease-out; }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+    </style>
+</head>
+<body class="bg-[#e9e9e9] text-slate-800 min-h-screen flex flex-col transition-colors duration-700" id="main-body">
+
+    <header class="bg-white border-b-2 border-black/10 px-6 py-4 flex justify-between items-center shadow-sm z-20 sticky top-0">
+        <div class="flex items-center gap-4">
+            <div class="bg-slate-900 text-white font-black px-3 py-1 text-xl tracking-tighter rounded">RETIMF</div>
+            <div class="leading-tight border-l-2 border-gray-300 pl-4">
+                <h1 class="text-xl font-bold text-slate-900 tracking-tight">EMERGENCY HUB</h1>
+                <p class="text-xs text-gray-500 font-semibold uppercase tracking-widest">Central Monitoring Unit</p>
+            </div>
+        </div>
+        <div class="text-right">
+            <div id="clock" class="text-2xl font-bold font-mono text-slate-700">--:--</div>
+            <div class="flex items-center justify-end gap-2 text-xs font-bold text-gray-400 uppercase">
+                <span id="conn-dot" class="w-2 h-2 rounded-full bg-red-500"></span>
+                <span id="conn-text">Offline</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-1 max-w-7xl mx-auto w-full p-6 flex flex-col gap-6">
+
+        <section id="alert-card" class="bg-white rounded-3xl border border-gray-200 shadow-xl overflow-hidden flex flex-col landscape:flex-row transition-all duration-500 transform">
+            <div id="alert-side-color" class="w-full h-4 landscape:w-4 landscape:h-auto bg-gray-300 transition-colors duration-500"></div>
+            
+            <div class="p-8 flex-1 flex flex-col landscape:flex-row items-center gap-8">
+                <div class="flex-shrink-0">
+                    <div id="alert-icon-bg" class="w-28 h-28 rounded-full bg-gray-100 flex items-center justify-center shadow-inner transition-colors duration-500">
+                        </div>
+                </div>
+
+                <div class="flex-1 text-center landscape:text-left">
+                    <div class="flex items-center gap-3 mb-2 justify-center landscape:justify-start">
+                        <span id="alert-badge" class="px-3 py-1 rounded-full bg-gray-200 text-gray-600 text-xs font-bold uppercase tracking-wider">ESPERANDO</span>
+                    </div>
+                    <h2 id="headline" class="text-5xl font-black leading-none text-slate-900 mb-4 uppercase tracking-tight">SISTEMA INICIADO</h2>
+                    <p id="instruction" class="text-2xl text-slate-700 font-bold border-l-4 border-slate-300 pl-4">Esperando conexión a HiveMQ...</p>
+                </div>
+
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 text-center min-w-[160px] w-full landscape:w-auto mt-4 landscape:mt-0">
+                    <p class="text-xs text-gray-500 uppercase font-bold mb-1">Lectura</p>
+                    <p id="sensor-val" class="text-5xl font-black text-slate-800 font-mono">--</p>
+                    <p id="sensor-unit" class="text-sm text-gray-400 font-bold">--</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="grid grid-cols-1 landscape:grid-cols-3 gap-6 flex-1">
+            
+            <section class="landscape:col-span-2 bg-white rounded-2xl border border-gray-200 shadow-sm p-6 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+                        <span class="bg-blue-100 text-blue-600 p-1 rounded">🛡️</span> Detalles del Evento
+                    </h3>
+                    <p id="description" class="text-lg text-gray-600 mb-6">No hay información disponible.</p>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 opacity-60 mt-auto">
+                    <div class="bg-gray-50 p-3 rounded-lg text-center border"><span class="block text-2xl">📢</span><span class="text-xs font-bold">AVISAR</span></div>
+                    <div class="bg-gray-50 p-3 rounded-lg text-center border"><span class="block text-2xl">🚒</span><span class="text-xs font-bold">112</span></div>
+                    <div class="bg-gray-50 p-3 rounded-lg text-center border"><span class="block text-2xl">🚪</span><span class="text-xs font-bold">SALIDAS</span></div>
+                    <div class="bg-gray-50 p-3 rounded-lg text-center border"><span class="block text-2xl">🔋</span><span class="text-xs font-bold">ENERGÍA</span></div>
+                </div>
+            </section>
+
+            <div class="flex flex-col gap-6">
+                <section class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 flex-1 overflow-hidden flex flex-col min-h-[300px]">
+                    <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+                        <span class="bg-yellow-100 text-yellow-600 p-1 rounded">📜</span> Historial Reciente
+                    </h3>
+                    
+                    <div id="history-container" class="space-y-3 overflow-y-auto pr-2 flex-1">
+                        <div class="text-center text-gray-400 text-sm py-4 italic">Historial vacío...</div>
+                    </div>
+                </section>
+
+                <button class="bg-red-600 text-white rounded-2xl p-4 shadow-lg flex items-center justify-between hover:scale-[1.02] transition-transform flex-shrink-0">
+                    <div>
+                        <p class="text-xs font-bold uppercase text-red-100 opacity-80">Emergency SOS</p>
+                        <p class="text-3xl font-black">112 / 911</p>
+                    </div>
+                    <div class="text-3xl">📞</div>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script is:inline>
+        // RELOJ
+        setInterval(() => {
+            document.getElementById('clock').innerText = new Date().toLocaleTimeString('es-ES', {hour:'2-digit', minute:'2-digit'});
+        }, 1000);
+
+        // ==========================================
+        // CONFIGURACIÓN HIVEMQ CLOUD (Pon aquí tus credenciales)
+        // ==========================================
+        const BROKER = "8c5f6d94879849ce994d70618deed882.s1.eu.hivemq.cloud"; 
+        const PORT = 8884;
+        const USUARIO = "Iker_tfg";
+        const PASSWORD = "P3nS@C4L2mxJZrH";
+        const TOPIC = "totem/alertas";
+        // ==========================================
+
+        const CLIENT_ID = "Web_Client_" + Math.random().toString(16).substr(2,8);
+        const client = new Paho.MQTT.Client(BROKER, PORT, CLIENT_ID);
+
+        client.onConnectionLost = (res) => {
+            document.getElementById("conn-dot").className = "w-2 h-2 rounded-full bg-red-500";
+            document.getElementById("conn-text").innerText = "OFFLINE";
+            console.log("Desconectado de HiveMQ:", res.errorMessage);
+            
+            setTimeout(() => {
+                connectMQTT();
+            }, 5000);
+        };
+
+        client.onMessageArrived = (msg) => {
+            const payload = JSON.parse(msg.payloadString);
+            const info = payload.alert.info[0];
+            
+            addToHistory(info);
+            updateDashboard(info);
+        };
+
+        function connectMQTT() {
+            client.connect({
+                userName: USUARIO,
+                password: PASSWORD,
+                useSSL: true,
+                onSuccess: () => {
+                    document.getElementById("conn-dot").className = "w-2 h-2 rounded-full bg-green-500 animate-pulse";
+                    document.getElementById("conn-text").innerText = "ONLINE";
+                    client.subscribe(TOPIC);
+                }
+            });
+        }
+
+        connectMQTT();
+
+        // --- FUNCIONES DE INTERFAZ ---
+        function addToHistory(info) {
+            const container = document.getElementById("history-container");
+            const time = new Date().toLocaleTimeString('es-ES', {hour:'2-digit', minute:'2-digit', second:'2-digit'});
+            
+            if (container.children[0] && container.children[0].innerText.includes("vacío")) {
+                container.innerHTML = "";
+            }
+
+            let borderColor = "border-gray-200";
+            if (info.severity === "Severe") borderColor = "border-red-500";
+            if (info.severity === "Moderate") borderColor = "border-yellow-400";
+            if (info.severity === "Minor") borderColor = "border-green-500";
+
+            const itemHTML = `
+                <div class="flex gap-3 items-start pl-3 border-l-4 ${borderColor} bg-gray-50 p-2 rounded slide-in">
+                    <div>
+                        <span class="text-[10px] font-mono text-gray-400 block">${time}</span>
+                        <h4 class="text-xs font-bold text-slate-800 uppercase leading-tight">${info.headline}</h4>
+                    </div>
+                </div>
+            `;
+
+            container.insertAdjacentHTML('afterbegin', itemHTML);
+
+            if (container.children.length > 5) {
+                container.lastElementChild.remove();
+            }
+        }
+
+        function updateDashboard(info) {
+            const sev = info.severity;
+            const param = info.parameter[0]; 
+
+            document.getElementById("headline").innerText = info.headline;
+            document.getElementById("description").innerText = info.description;
+            document.getElementById("instruction").innerText = info.instruction;
+            document.getElementById("sensor-val").innerText = param.value;
+            document.getElementById("sensor-unit").innerText = info.parameter[1]?.value || "";
+
+            const body = document.getElementById("main-body");
+            const card = document.getElementById("alert-card");
+            const side = document.getElementById("alert-side-color");
+            const iconBg = document.getElementById("alert-icon-bg");
+            const badge = document.getElementById("alert-badge");
+
+            body.classList.remove("bg-red-50", "bg-amber-50", "bg-blue-50", "bg-[#e9e9e9]");
+            card.classList.remove("pulse-red");
+
+            // --- ICONOS SVG PROFESIONALES ---
+            const iconFire = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16"><path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 8.21 0 0 0 3 2.48Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 18a3.75 3.75 0 0 0 .495-7.468 5.99 5.99 0 0 0-1.925 3.547 5.975 5.975 0 0 1-2.133-1.001A3.75 3.75 0 0 0 12 18Z" /></svg>`;
+            const iconAlert = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5" /></svg>`;          
+            const iconWarning = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3Z" /></svg>`;
+            const iconShield = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" /></svg>`;
+
+            if (sev === "Severe") {
+                body.classList.add("bg-red-50");
+                card.classList.add("pulse-red", "border-red-500");
+                side.className = "w-full md:w-4 bg-red-600";
+                iconBg.className = "w-28 h-28 rounded-full bg-red-100 text-red-600 flex items-center justify-center shadow-inner";
+                // Cambiamos innerText por innerHTML para inyectar el SVG
+                iconBg.innerHTML = info.headline.includes("FUEGO") ? iconFire : iconAlert; 
+                badge.className = "px-3 py-1 rounded-full bg-red-600 text-white text-xs font-bold uppercase tracking-wider animate-pulse";
+                badge.innerText = "PELIGRO";
+            } 
+            else if (sev === "Moderate") {
+                body.classList.add("bg-amber-50");
+                side.className = "w-full md:w-4 bg-yellow-400";
+                iconBg.className = "w-28 h-28 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center shadow-inner";
+                iconBg.innerHTML = iconWarning; 
+                badge.className = "px-3 py-1 rounded-full bg-yellow-400 text-yellow-900 text-xs font-bold uppercase tracking-wider";
+                badge.innerText = "ALERTA";
+            } 
+            else {
+                body.classList.add("bg-[#e9e9e9]");
+                side.className = "w-full md:w-4 bg-emerald-500";
+                iconBg.className = "w-28 h-28 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shadow-inner";
+                iconBg.innerHTML = iconShield; 
+                badge.className = "px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold uppercase tracking-wider";
+                badge.innerText = "NORMAL";
+            }
+        }
+    </script>
+</body>
+</html>
