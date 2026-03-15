@@ -1,25 +1,34 @@
 ---
 import '../styles/global.css';
+import { ui } from '../i18n/ui.js';
+
+// ==========================================
+// IDIOMA DEL TÓTEM (Cambia a 'es', 'en', 'eu' o 'pt' para probar)
+const LANG = 'es'; 
+// ==========================================
+
+function t(key: string) {
+    return (ui as any)[LANG][key] || key;
+}
 ---
 
 <!DOCTYPE html>
-<html lang="es">
+<html lang={LANG}>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RETIMF - Multi-Hazard Dashboard</title>
     
     <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js"></script>
-    
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
     <style>
         body { font-family: 'Inter', sans-serif; }
         .pulse-red { animation: pulseRed 2s infinite; }
         @keyframes pulseRed { 
-            0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); }
-            70% { box-shadow: 0 0 0 20px rgba(220, 38, 38, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); } 
+            70% { box-shadow: 0 0 0 20px rgba(220, 38, 38, 0); } 
+            100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); } 
         }
         .slide-in { animation: slideIn 0.5s ease-out; }
         @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
@@ -31,8 +40,8 @@ import '../styles/global.css';
         <div class="flex items-center gap-4">
             <div class="bg-slate-900 text-white font-black px-3 py-1 text-xl tracking-tighter rounded">RETIMF</div>
             <div class="leading-tight border-l-2 border-gray-300 pl-4">
-                <h1 class="text-xl font-bold text-slate-900 tracking-tight">EMERGENCY HUB</h1>
-                <p class="text-xs text-gray-500 font-semibold uppercase tracking-widest">Central Monitoring Unit</p>
+                <h1 class="text-xl font-bold text-slate-900 tracking-tight">{t('nav.title')}</h1>
+                <p class="text-xs text-gray-500 font-semibold uppercase tracking-widest">{t('nav.subtitle')}</p>
             </div>
         </div>
         <div class="text-right">
@@ -52,19 +61,20 @@ import '../styles/global.css';
             <div class="p-8 flex-1 flex flex-col landscape:flex-row items-center gap-8">
                 <div class="flex-shrink-0">
                     <div id="alert-icon-bg" class="w-28 h-28 rounded-full bg-gray-100 flex items-center justify-center shadow-inner transition-colors duration-500">
-                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16 text-gray-400"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" /></svg>
+                    </div>
                 </div>
 
                 <div class="flex-1 text-center landscape:text-left">
                     <div class="flex items-center gap-3 mb-2 justify-center landscape:justify-start">
-                        <span id="alert-badge" class="px-3 py-1 rounded-full bg-gray-200 text-gray-600 text-xs font-bold uppercase tracking-wider">ESPERANDO</span>
+                        <span id="alert-badge" class="px-3 py-1 rounded-full bg-gray-200 text-gray-600 text-xs font-bold uppercase tracking-wider">{t('status.waiting')}</span>
                     </div>
-                    <h2 id="headline" class="text-5xl font-black leading-none text-slate-900 mb-4 uppercase tracking-tight">SISTEMA INICIADO</h2>
-                    <p id="instruction" class="text-2xl text-slate-700 font-bold border-l-4 border-slate-300 pl-4">Esperando conexión a HiveMQ...</p>
+                    <h2 id="headline" class="text-5xl font-black leading-none text-slate-900 mb-4 uppercase tracking-tight">{t('status.init')}</h2>
+                    <p id="instruction" class="text-2xl text-slate-700 font-bold border-l-4 border-slate-300 pl-4">{t('status.desc')}</p>
                 </div>
 
                 <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 text-center min-w-[160px] w-full landscape:w-auto mt-4 landscape:mt-0">
-                    <p class="text-xs text-gray-500 uppercase font-bold mb-1">Lectura</p>
+                    <p class="text-xs text-gray-500 uppercase font-bold mb-1">{t('sensor.label')}</p>
                     <p id="sensor-val" class="text-5xl font-black text-slate-800 font-mono">--</p>
                     <p id="sensor-unit" class="text-sm text-gray-400 font-bold">--</p>
                 </div>
@@ -76,27 +86,27 @@ import '../styles/global.css';
             <section class="landscape:col-span-2 bg-white rounded-2xl border border-gray-200 shadow-sm p-6 flex flex-col justify-between">
                 <div>
                     <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
-                        <span class="bg-blue-100 text-blue-600 p-1 rounded">🛡️</span> Detalles del Evento
+                        <span class="bg-blue-100 text-blue-600 p-1 rounded">🛡️</span> {t('details.title')}
                     </h3>
-                    <p id="description" class="text-lg text-gray-600 mb-6">No hay información disponible.</p>
+                    <p id="description" class="text-lg text-gray-600 mb-6">{t('details.empty')}</p>
                 </div>
                 
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 opacity-60 mt-auto">
-                    <div class="bg-gray-50 p-3 rounded-lg text-center border"><span class="block text-2xl">📢</span><span class="text-xs font-bold">AVISAR</span></div>
+                    <div class="bg-gray-50 p-3 rounded-lg text-center border"><span class="block text-2xl">📢</span><span class="text-xs font-bold">{t('actions.notify')}</span></div>
                     <div class="bg-gray-50 p-3 rounded-lg text-center border"><span class="block text-2xl">🚒</span><span class="text-xs font-bold">112</span></div>
-                    <div class="bg-gray-50 p-3 rounded-lg text-center border"><span class="block text-2xl">🚪</span><span class="text-xs font-bold">SALIDAS</span></div>
-                    <div class="bg-gray-50 p-3 rounded-lg text-center border"><span class="block text-2xl">🔋</span><span class="text-xs font-bold">ENERGÍA</span></div>
+                    <div class="bg-gray-50 p-3 rounded-lg text-center border"><span class="block text-2xl">🚪</span><span class="text-xs font-bold">{t('actions.exits')}</span></div>
+                    <div class="bg-gray-50 p-3 rounded-lg text-center border"><span class="block text-2xl">🔋</span><span class="text-xs font-bold">{t('actions.power')}</span></div>
                 </div>
             </section>
 
             <div class="flex flex-col gap-6">
                 <section class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 flex-1 overflow-hidden flex flex-col min-h-[300px]">
                     <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
-                        <span class="bg-yellow-100 text-yellow-600 p-1 rounded">📜</span> Historial Reciente
+                        <span class="bg-yellow-100 text-yellow-600 p-1 rounded">📜</span> {t('history.title')}
                     </h3>
                     
                     <div id="history-container" class="space-y-3 overflow-y-auto pr-2 flex-1">
-                        <div class="text-center text-gray-400 text-sm py-4 italic">Historial vacío...</div>
+                        <div class="text-center text-gray-400 text-sm py-4 italic">{t('history.empty')}</div>
                     </div>
                 </section>
 
@@ -111,14 +121,17 @@ import '../styles/global.css';
         </div>
     </main>
 
-    <script is:inline>
+    <script is:inline define:vars={{ ui, LANG }}>
+        // Función de traducción dinámica
+        const trans = (key) => ui[LANG][key] || key;
+
         // RELOJ
         setInterval(() => {
             document.getElementById('clock').innerText = new Date().toLocaleTimeString('es-ES', {hour:'2-digit', minute:'2-digit'});
         }, 1000);
 
         // ==========================================
-        // CONFIGURACIÓN HIVEMQ CLOUD (Pon aquí tus credenciales)
+        // CONFIGURACIÓN HIVEMQ CLOUD
         // ==========================================
         const BROKER = "8c5f6d94879849ce994d70618deed882.s1.eu.hivemq.cloud"; 
         const PORT = 8884;
@@ -168,7 +181,7 @@ import '../styles/global.css';
             const container = document.getElementById("history-container");
             const time = new Date().toLocaleTimeString('es-ES', {hour:'2-digit', minute:'2-digit', second:'2-digit'});
             
-            if (container.children[0] && container.children[0].innerText.includes("vacío")) {
+            if (container.children[0] && container.children[0].innerText.includes(trans('history.empty'))) {
                 container.innerHTML = "";
             }
 
@@ -214,35 +227,34 @@ import '../styles/global.css';
 
             // --- ICONOS SVG PROFESIONALES ---
             const iconFire = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16"><path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 8.21 0 0 0 3 2.48Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 18a3.75 3.75 0 0 0 .495-7.468 5.99 5.99 0 0 0-1.925 3.547 5.975 5.975 0 0 1-2.133-1.001A3.75 3.75 0 0 0 12 18Z" /></svg>`;
-            const iconAlert = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5" /></svg>`;          
+            const iconAlert = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5" /></svg>`;
             const iconWarning = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3Z" /></svg>`;
             const iconShield = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" /></svg>`;
 
             if (sev === "Severe") {
                 body.classList.add("bg-red-50");
                 card.classList.add("pulse-red", "border-red-500");
-                side.className = "w-full md:w-4 bg-red-600";
+                side.className = "w-full h-4 landscape:w-4 landscape:h-auto bg-red-600";
                 iconBg.className = "w-28 h-28 rounded-full bg-red-100 text-red-600 flex items-center justify-center shadow-inner";
-                // Cambiamos innerText por innerHTML para inyectar el SVG
                 iconBg.innerHTML = info.headline.includes("FUEGO") ? iconFire : iconAlert; 
                 badge.className = "px-3 py-1 rounded-full bg-red-600 text-white text-xs font-bold uppercase tracking-wider animate-pulse";
-                badge.innerText = "PELIGRO";
+                badge.innerText = trans('badge.danger');
             } 
             else if (sev === "Moderate") {
                 body.classList.add("bg-amber-50");
-                side.className = "w-full md:w-4 bg-yellow-400";
+                side.className = "w-full h-4 landscape:w-4 landscape:h-auto bg-yellow-400";
                 iconBg.className = "w-28 h-28 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center shadow-inner";
                 iconBg.innerHTML = iconWarning; 
                 badge.className = "px-3 py-1 rounded-full bg-yellow-400 text-yellow-900 text-xs font-bold uppercase tracking-wider";
-                badge.innerText = "ALERTA";
+                badge.innerText = trans('badge.alert');
             } 
             else {
                 body.classList.add("bg-[#e9e9e9]");
-                side.className = "w-full md:w-4 bg-emerald-500";
+                side.className = "w-full h-4 landscape:w-4 landscape:h-auto bg-emerald-500";
                 iconBg.className = "w-28 h-28 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shadow-inner";
                 iconBg.innerHTML = iconShield; 
                 badge.className = "px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold uppercase tracking-wider";
-                badge.innerText = "NORMAL";
+                badge.innerText = trans('badge.normal');
             }
         }
     </script>
