@@ -16,7 +16,6 @@
             70% { box-shadow: 0 0 0 20px rgba(220, 38, 38, 0); }
             100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
         }
-        /* Animación para cuando entra un item nuevo al historial */
         .slide-in { animation: slideIn 0.5s ease-out; }
         @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
     </style>
@@ -57,7 +56,7 @@
                         <span id="alert-badge" class="px-3 py-1 rounded-full bg-gray-200 text-gray-600 text-xs font-bold uppercase tracking-wider">ESPERANDO</span>
                     </div>
                     <h2 id="headline" class="text-5xl font-black leading-none text-slate-900 mb-4 uppercase tracking-tight">SISTEMA INICIADO</h2>
-                    <p id="instruction" class="text-2xl text-slate-700 font-bold border-l-4 border-slate-300 pl-4">Esperando conexión MQTT...</p>
+                    <p id="instruction" class="text-2xl text-slate-700 font-bold border-l-4 border-slate-300 pl-4">Esperando conexión a HiveMQ...</p>
                 </div>
 
                 <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 text-center min-w-[160px]">
@@ -112,50 +111,82 @@
             document.getElementById('clock').innerText = new Date().toLocaleTimeString('es-ES', {hour:'2-digit', minute:'2-digit'});
         }, 1000);
 
-        // MQTT
-        const client = new Paho.MQTT.Client("51.49.204.68", 9001, "Web_Client_" + Math.random().toString(16).substr(2,8));
+        // ==========================================
+        // CONFIGURACIÓN HIVEMQ CLOUD (Cámbialo aquí)
+        // ==========================================
+        const BROKER = "8c5f6d94879849ce994d70618deed882.s1.eu.hivemq.cloud"; 
+        const PORT = 8884;
+        const USUARIO = "Iker_tfg";
+        const PASSWORD = "P3nS@C4L2mxJZrH";
+        const TOPIC = "totem/alertas";
+        // ==========================================
+
+        const CLIENT_ID = "Web_Client_" + Math.random().toString(16).substr(2,8);
+        const client = new Paho.MQTT.Client(BROKER, PORT, CLIENT_ID);
 
         client.onConnectionLost = (res) => {
             document.getElementById("conn-dot").className = "w-2 h-2 rounded-full bg-red-500";
             document.getElementById("conn-text").innerText = "OFFLINE";
+            console.log("Desconectado de HiveMQ:", res.errorMessage);
+            
+            // INTENTO DE RECONEXIÓN AUTOMÁTICA
+            console.log("Intentando reconectar en 5 segundos...");
+            document.getElementById("instruction").innerText = "Pérdida de señal. Intentando reconectar...";
+            
+            setTimeout(() => {
+                client.connect({
+                    userName: USUARIO,
+                    password: PASSWORD,
+                    useSSL: true,
+                    onSuccess: () => {
+                        document.getElementById("conn-dot").className = "w-2 h-2 rounded-full bg-green-500 animate-pulse";
+                        document.getElementById("conn-text").innerText = "ONLINE";
+                        client.subscribe(TOPIC);
+                        document.getElementById("instruction").innerText = "Conexión recuperada. Esperando alertas...";
+                    }
+                });
+            }, 5000); // Espera 5 segundos y lo vuelve a intentar
         };
 
         client.onMessageArrived = (msg) => {
             const payload = JSON.parse(msg.payloadString);
             const info = payload.alert.info[0];
             
-            // 1. Añadir al historial ANTES de actualizar la pantalla principal
             addToHistory(info);
-            
-            // 2. Actualizar pantalla principal
             updateDashboard(info);
         };
 
+        // --- CONEXIÓN A HIVEMQ ---
         client.connect({
+            userName: USUARIO,
+            password: PASSWORD,
+            useSSL: true, // Clave para HiveMQ
             onSuccess: () => {
                 document.getElementById("conn-dot").className = "w-2 h-2 rounded-full bg-green-500 animate-pulse";
                 document.getElementById("conn-text").innerText = "ONLINE";
-                client.subscribe("totem/alertas");
+                client.subscribe(TOPIC);
+                console.log("✅ Conectado a HiveMQ Cloud (WebSockets Seguro)");
+            },
+            onFailure: (err) => {
+                console.log("❌ Fallo de conexión:", err.errorMessage);
+                document.getElementById("instruction").innerText = "Error: Verifica credenciales o URL en el código.";
             }
         });
 
-        // --- FUNCIÓN HISTORIAL (NUEVA) ---
+        // --- FUNCIONES DE INTERFAZ ---
         function addToHistory(info) {
             const container = document.getElementById("history-container");
             const time = new Date().toLocaleTimeString('es-ES', {hour:'2-digit', minute:'2-digit', second:'2-digit'});
             
-            // Si dice "Historial vacío", lo borramos
             if (container.children[0] && container.children[0].innerText.includes("vacío")) {
                 container.innerHTML = "";
             }
 
-            // Color del borde según severidad
             let borderColor = "border-gray-200";
             if (info.severity === "Severe") borderColor = "border-red-500";
             if (info.severity === "Moderate") borderColor = "border-yellow-400";
             if (info.severity === "Minor") borderColor = "border-green-500";
 
-            // Crear el HTML del item
             const itemHTML = `
                 <div class="flex gap-3 items-start pl-3 border-l-4 ${borderColor} bg-gray-50 p-2 rounded slide-in">
                     <div>
@@ -165,10 +196,8 @@
                 </div>
             `;
 
-            // Insertar al principio (Prepend)
             container.insertAdjacentHTML('afterbegin', itemHTML);
 
-            // Limitar a 5 items para que no se llene infinito
             if (container.children.length > 5) {
                 container.lastElementChild.remove();
             }
@@ -176,16 +205,14 @@
 
         function updateDashboard(info) {
             const sev = info.severity;
-            const param = info.parameter[0]; // Coger el primer parámetro dinámico
+            const param = info.parameter[0]; 
 
-            // Textos
             document.getElementById("headline").innerText = info.headline;
             document.getElementById("description").innerText = info.description;
             document.getElementById("instruction").innerText = info.instruction;
             document.getElementById("sensor-val").innerText = param.value;
             document.getElementById("sensor-unit").innerText = info.parameter[1]?.value || "";
 
-            // Estilos Dinámicos
             const body = document.getElementById("main-body");
             const card = document.getElementById("alert-card");
             const side = document.getElementById("alert-side-color");
@@ -195,7 +222,6 @@
             body.classList.remove("bg-red-50", "bg-amber-50", "bg-blue-50", "bg-[#e9e9e9]");
             card.classList.remove("pulse-red");
 
-            // ICONOS Y COLORES POR TIPO DE SEVERIDAD
             if (sev === "Severe") {
                 body.classList.add("bg-red-50");
                 card.classList.add("pulse-red", "border-red-500");

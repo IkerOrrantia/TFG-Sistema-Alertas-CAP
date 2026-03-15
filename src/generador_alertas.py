@@ -3,12 +3,18 @@ import json
 import time
 import random
 import uuid
+import ssl
 from datetime import datetime
 
-# CONFIGURACIÓN
-BROKER = "51.49.204.68"
-PORT = 1883
+# ==========================================
+# CONFIGURACIÓN HIVEMQ CLOUD (Cámbialo aquí)
+# ==========================================
+BROKER = "8c5f6d94879849ce994d70618deed882.s1.eu.hivemq.cloud" 
+PORT = 8883                                
+USUARIO = "Iker_tfg"                
+PASSWORD = "P3nS@C4L2mxJZrH"            
 TOPIC = "totem/alertas"
+
 
 # --- LISTA DE POSIBLES ESCENARIOS ---
 ESCENARIOS = [
@@ -19,7 +25,7 @@ ESCENARIOS = [
         "desc": "Detectores de humo activados en Planta 2.",
         "instruction": "EVACUACIÓN INMEDIATA. No use ascensor.",
         "param_name": "temperature",
-        "param_val": lambda: str(random.randint(60, 120)), # Temperatura alta
+        "param_val": lambda: str(random.randint(60, 120)), 
         "param_unit": "°C"
     },
     {
@@ -29,7 +35,7 @@ ESCENARIOS = [
         "desc": "Niveles de CO2 superiores a lo recomendado.",
         "instruction": "Ventilación forzada activada. Abra ventanas.",
         "param_name": "reading",
-        "param_val": lambda: str(random.randint(1000, 1600)), # CO2 Medio
+        "param_val": lambda: str(random.randint(1000, 1600)), 
         "param_unit": "ppm"
     },
     {
@@ -39,7 +45,7 @@ ESCENARIOS = [
         "desc": "Parámetros ambientales dentro de rango.",
         "instruction": "Operación estándar.",
         "param_name": "reading",
-        "param_val": lambda: str(random.randint(400, 800)), # CO2 Bajo
+        "param_val": lambda: str(random.randint(400, 800)), 
         "param_unit": "ppm"
     },
     {
@@ -65,15 +71,10 @@ ESCENARIOS = [
 ]
 
 def generar_alerta_cap():
-    # 1. Elegir un desastre aleatorio
     escenario = random.choice(ESCENARIOS)
-    
-    # 2. Generar valor dinámico (ej. la temperatura cambia cada vez)
     valor_actual = escenario["param_val"]()
-
     ahora = datetime.now().isoformat()
     
-    # 3. Construir JSON CAP
     alerta = {
         "alert": {
             "identifier": f"ES-ALERT-{str(uuid.uuid4())[:8]}",
@@ -102,23 +103,26 @@ def generar_alerta_cap():
     return alerta
 
 def main():
-    client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, "Generador_Multievento")
+    client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, "Generador_Backend_TFG")
+    
+    # Añadimos las credenciales y el certificado TLS
+    client.username_pw_set(USUARIO, PASSWORD)
+    client.tls_set(tls_version=ssl.PROTOCOL_TLS)
     
     try:
         print(f"Conectando a {BROKER}...")
         client.connect(BROKER, PORT, 60)
-        print("✅ Generador de MULTI-ALERTAS listo.")
+        print("✅ Generador de MULTI-ALERTAS conectado a HiveMQ Cloud.")
         
         while True:
             payload = generar_alerta_cap()
             mensaje_json = json.dumps(payload, ensure_ascii=False)
             client.publish(TOPIC, mensaje_json)
             
-            # Log bonito
             info = payload['alert']['info'][0]
             print(f"📡 Enviado: {info['headline']} ({info['severity']})")
             
-            time.sleep(5) # Una alerta nueva cada 5 segundos
+            time.sleep(5)
 
     except Exception as e:
         print(f"❌ ERROR: {e}")
