@@ -10,9 +10,23 @@ function logEvent(type, message) {
     const timestamp = now.toISOString().replace('T', ' ').substring(0, 19);
     const logLine = `[${timestamp}] [${type}] ${message}\n`;
     
-    // Escribe en la consola y en el archivo de texto
+    // 1. Escribe en la consola y en el archivo de texto local
     console.log(logLine.trim());
     fs.appendFileSync(LOG_FILE, logLine, 'utf8');
+
+    // 2. Envía la telemetría a la nube (si el cliente está conectado)
+    if (typeof client !== 'undefined' && client.connected) {
+        // Empaquetamos el log en un JSON bonito
+        const telemetriaData = JSON.stringify({
+            dispositivo: "Totem-Deusto", 
+            timestamp: timestamp,
+            tipo: type,
+            mensaje: message
+        });
+        
+        // Publicamos en un canal exclusivo para mantenimiento
+        client.publish('totem/telemetria', telemetriaData);
+    }
 }
 
 logEvent('SISTEMA', 'Tótem encendido. Iniciando servicios de monitorización...');
