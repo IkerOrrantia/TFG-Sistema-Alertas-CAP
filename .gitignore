@@ -208,3 +208,6 @@ __marimo__/
 
 # Credenciales locales
 config.json
+
+# Archivos de log locales
+*.log

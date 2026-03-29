@@ -142,118 +142,72 @@ function t(key: string) {
     </main>
 
     <script is:inline define:vars={{ ui, LANG, credenciales }}>
-        // Función de traducción dinámica
+        // 1. UTILIDADES, RELOJ E ICONOS
         const trans = (key) => ui[LANG][key] || key;
 
-        // RELOJ
         setInterval(() => {
-            document.getElementById('clock').innerText = new Date().toLocaleTimeString('es-ES', {hour:'2-digit', minute:'2-digit'});
+            const clock = document.getElementById('clock');
+            if (clock) {
+                clock.innerText = new Date().toLocaleTimeString('es-ES', {hour: '2-digit', minute: '2-digit'});
+            }
         }, 1000);
 
-        // ==========================================
-        // CONFIGURACIÓN HIVEMQ CLOUD 
-        // ==========================================
+        // Iconos en formato SVG para la interfaz
+        const iconFire = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16"><path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925 3.546 5.974 5.974 0 01-2.133-1A3.75 3.75 0 0012 18z" /></svg>`;
+        const iconAlert = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>`;
+        const iconWarning = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>`;
+        const iconShield = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`;
+        
+        // 2. CREDENCIALES
         const BROKER = credenciales.BROKER; 
-        const PORT = credenciales.PORT;
+        const PORT = Number(credenciales.PORT); 
         const USUARIO = credenciales.USUARIO;
         const PASSWORD = credenciales.PASSWORD;
         const TOPIC = credenciales.TOPIC;
-        // ==========================================
 
-        const CLIENT_ID = "Web_Client_" + Math.random().toString(16).substr(2,8);
-        const client = new Paho.MQTT.Client(BROKER, PORT, CLIENT_ID);
-
-        client.onConnectionLost = (res) => {
-            document.getElementById("conn-dot").className = "w-2 h-2 rounded-full bg-red-500";
-            document.getElementById("conn-text").innerText = "OFFLINE";
-            console.log("Desconectado de HiveMQ:", res.errorMessage);
-            
-            setTimeout(() => {
-                connectMQTT();
-            }, 5000);
-        };
-
-        client.onMessageArrived = (msg) => {
-            const payload = JSON.parse(msg.payloadString);
-            const info = payload.alert.info[0];
-            
-            addToHistory(info);
-            updateDashboard(info);
-        };
-
-        function connectMQTT() {
-            client.connect({
-                userName: USUARIO,
-                password: PASSWORD,
-                useSSL: true,
-                onSuccess: () => {
-                    document.getElementById("conn-dot").className = "w-2 h-2 rounded-full bg-green-500 animate-pulse";
-                    document.getElementById("conn-text").innerText = "ONLINE";
-                    client.subscribe(TOPIC);
-                }
-            });
-        }
-
-        connectMQTT();
-
-        // --- FUNCIONES DE INTERFAZ ---
+        // 3. FUNCIONES DE ACTUALIZACIÓN VISUAL (DOM)
         function addToHistory(info) {
             const container = document.getElementById("history-container");
-            const time = new Date().toLocaleTimeString('es-ES', {hour:'2-digit', minute:'2-digit', second:'2-digit'});
+            const time = new Date().toLocaleTimeString('es-ES', {hour: '2-digit', minute:'2-digit'});
             
-            if (container.children[0] && container.children[0].innerText.includes(trans('history.empty'))) {
-                container.innerHTML = "";
-            }
+            // Eliminar el mensaje de "vacío" si existe
+            const emptyMsg = container.querySelector('.italic');
+            if(emptyMsg) emptyMsg.remove();
 
-            let borderColor = "border-gray-200";
-            if (info.severity === "Severe") borderColor = "border-red-500";
-            if (info.severity === "Moderate") borderColor = "border-yellow-400";
-            if (info.severity === "Minor") borderColor = "border-green-500";
+            let colorClass = "border-l-emerald-500 bg-emerald-50";
+            if (info.severity === "Extreme" || info.severity === "Severe") colorClass = "border-l-red-500 bg-red-50";
+            else if (info.severity === "Moderate") colorClass = "border-l-yellow-400 bg-amber-50";
 
-            const itemHTML = `
-                <div class="flex gap-3 items-start pl-3 border-l-4 ${borderColor} bg-gray-50 p-2 rounded slide-in">
-                    <div>
-                        <span class="text-[10px] font-mono text-gray-400 block">${time}</span>
-                        <h4 class="text-xs font-bold text-slate-800 uppercase leading-tight">${info.headline}</h4>
-                    </div>
+            const item = document.createElement("div");
+            item.className = `p-3 rounded-r-lg border-l-4 ${colorClass} text-sm flex justify-between items-center shadow-sm mb-2`;
+            item.innerHTML = `
+                <div>
+                    <p class="font-bold text-gray-800">${info.headline}</p>
+                    <p class="text-xs text-gray-500">${info.senderName || 'Sistema'}</p>
                 </div>
+                <span class="text-xs font-mono text-gray-400 whitespace-nowrap ml-2">${time}</span>
             `;
-
-            container.insertAdjacentHTML('afterbegin', itemHTML);
-
-            if (container.children.length > 5) {
-                container.lastElementChild.remove();
-            }
+            container.prepend(item);
         }
 
         function updateDashboard(info) {
-            const sev = info.severity;
-            const param = info.parameter[0]; 
-
-            document.getElementById("headline").innerText = info.headline;
-            document.getElementById("description").innerText = info.description;
-            document.getElementById("instruction").innerText = info.instruction;
-            document.getElementById("sensor-val").innerText = param.value;
-            document.getElementById("sensor-unit").innerText = info.parameter[1]?.value || "";
-
             const body = document.getElementById("main-body");
-            const card = document.getElementById("alert-card");
-            const side = document.getElementById("alert-side-color");
-            const iconBg = document.getElementById("alert-icon-bg");
-            const badge = document.getElementById("alert-badge");
+            const side = document.getElementById("severity-side");
+            const iconBg = document.getElementById("severity-icon-bg");
+            const badge = document.getElementById("severity-badge");
+            
+            // Textos
+            document.getElementById("headline").innerText = info.headline;
+            document.getElementById("sender").innerText = info.senderName || "Autoridad Competente";
+            document.getElementById("description").innerText = info.description || trans('details.empty');
 
-            body.classList.remove("bg-red-50", "bg-amber-50", "bg-blue-50", "bg-[#e9e9e9]");
-            card.classList.remove("pulse-red");
+            // Limpiar clases previas
+            body.className = "h-screen w-full transition-colors duration-500 flex flex-col";
+            body.classList.remove("pulse-red");
 
-            // --- ICONOS SVG PROFESIONALES ---
-            const iconFire = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16"><path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 8.21 0 0 0 3 2.48Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 18a3.75 3.75 0 0 0 .495-7.468 5.99 5.99 0 0 0-1.925 3.547 5.975 5.975 0 0 1-2.133-1.001A3.75 3.75 0 0 0 12 18Z" /></svg>`;
-            const iconAlert = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5" /></svg>`;
-            const iconWarning = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3Z" /></svg>`;
-            const iconShield = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" /></svg>`;
-
-            if (sev === "Severe") {
-                body.classList.add("bg-red-50");
-                card.classList.add("pulse-red", "border-red-500");
+            const sev = info.severity;
+            if (sev === "Extreme" || sev === "Severe") {
+                body.classList.add("bg-red-50", "pulse-red");
                 side.className = "w-full h-4 landscape:w-4 landscape:h-auto bg-red-600";
                 iconBg.className = "w-28 h-28 rounded-full bg-red-100 text-red-600 flex items-center justify-center shadow-inner";
                 iconBg.innerHTML = info.headline.includes("FUEGO") ? iconFire : iconAlert; 
@@ -273,10 +227,76 @@ function t(key: string) {
                 side.className = "w-full h-4 landscape:w-4 landscape:h-auto bg-emerald-500";
                 iconBg.className = "w-28 h-28 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shadow-inner";
                 iconBg.innerHTML = iconShield; 
-                badge.className = "px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold uppercase tracking-wider";
-                badge.innerText = trans('badge.normal');
+                badge.className = "px-3 py-1 rounded-full bg-emerald-500 text-white text-xs font-bold uppercase tracking-wider";
+                badge.innerText = trans('badge.safe');
             }
         }
+
+        // 4. FUNCIONES MQTT 
+        const client = new Paho.MQTT.Client(BROKER, PORT, "TotemWeb_" + parseInt(Math.random() * 100, 10));
+
+        function onConnect() {
+            console.log("¡Conexión exitosa a HiveMQ!");
+            const dot = document.getElementById("conn-dot");
+            const text = document.getElementById("conn-text");
+            
+            if (dot) dot.className = "w-2 h-2 rounded-full bg-green-500 animate-pulse";
+            if (text) text.innerText = "ONLINE";
+            
+            client.subscribe(TOPIC);
+        }
+
+        function onConnectionLost(responseObject) {
+            console.warn("Desconectado de HiveMQ:", responseObject.errorMessage);
+            const dot = document.getElementById("conn-dot");
+            const text = document.getElementById("conn-text");
+            
+            if (dot) dot.className = "w-2 h-2 rounded-full bg-red-500";
+            if (text) text.innerText = "OFFLINE";
+            
+            // Reintentar conexión automáticamente a los 5 segundos
+            setTimeout(() => {
+                console.log("Intentando reconectar...");
+                connectMQTT();
+            }, 5000);
+        }
+
+        function onMessageArrived(message) {
+            try {
+                const payload = JSON.parse(message.payloadString);
+                const info = payload.alert.info[0];
+                
+                console.log("Alerta recibida:", info.headline);
+                
+                // Disparamos la actualización visual
+                addToHistory(info);
+                updateDashboard(info);
+                
+            } catch (e) {
+                console.error("Error al procesar el JSON de la alerta:", e);
+            }
+        }
+
+        function connectMQTT() {
+            console.log("Intentando conectar a:", BROKER, "por el puerto:", PORT);
+            client.connect({
+                userName: USUARIO,
+                password: PASSWORD,
+                useSSL: true, 
+                onSuccess: onConnect,
+                onFailure: function (e) {
+                    console.error("Fallo absoluto al conectar a HiveMQ:", e);
+                    setTimeout(connectMQTT, 5000);
+                }
+            });
+        }
+
+        // 5. ASIGNAR CALLBACKS Y ARRANCAR
+        client.onConnectionLost = onConnectionLost;
+        client.onMessageArrived = onMessageArrived;
+
+        // Lanzamos la primera conexión
+        connectMQTT();
     </script>
 </body>
 </html>
