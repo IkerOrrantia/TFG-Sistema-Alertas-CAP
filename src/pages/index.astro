@@ -1,10 +1,11 @@
 ---
 import '../styles/global.css';
 import { ui } from '../i18n/ui.js';
+import credenciales from '../../config.json';
 
 // ==========================================
 // IDIOMA DEL TÓTEM (Cambia a 'es', 'en', 'eu' o 'pt' para probar)
-const LANG = 'es'; 
+const LANG = 'eu'; 
 // ==========================================
 
 function t(key: string) {
@@ -140,7 +141,7 @@ function t(key: string) {
     </main>
     </main>
 
-    <script is:inline define:vars={{ ui, LANG }}>
+    <script is:inline define:vars={{ ui, LANG, credenciales }}>
         // Función de traducción dinámica
         const trans = (key) => ui[LANG][key] || key;
 
@@ -150,13 +151,13 @@ function t(key: string) {
         }, 1000);
 
         // ==========================================
-        // CONFIGURACIÓN HIVEMQ CLOUD
+        // CONFIGURACIÓN HIVEMQ CLOUD 
         // ==========================================
-        const BROKER = "8c5f6d94879849ce994d70618deed882.s1.eu.hivemq.cloud"; 
-        const PORT = 8884;
-        const USUARIO = "Iker_tfg";
-        const PASSWORD = "P3nS@C4L2mxJZrH";
-        const TOPIC = "totem/alertas";
+        const BROKER = credenciales.BROKER; 
+        const PORT = credenciales.PORT;
+        const USUARIO = credenciales.USUARIO;
+        const PASSWORD = credenciales.PASSWORD;
+        const TOPIC = credenciales.TOPIC;
         // ==========================================
 
         const CLIENT_ID = "Web_Client_" + Math.random().toString(16).substr(2,8);
