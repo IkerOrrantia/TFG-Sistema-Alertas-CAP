@@ -5,7 +5,7 @@ import credenciales from '../../config.json';
 
 // ==========================================
 // IDIOMA DEL TÓTEM (Cambia a 'es', 'en', 'eu' o 'pt' para probar)
-const LANG = 'eu'; 
+const LANG = 'en'; 
 // ==========================================
 
 function t(key: string) {
@@ -179,56 +179,73 @@ function t(key: string) {
             else if (info.severity === "Moderate") colorClass = "border-l-yellow-400 bg-amber-50";
 
             const item = document.createElement("div");
-            item.className = `p-3 rounded-r-lg border-l-4 ${colorClass} text-sm flex justify-between items-center shadow-sm mb-2`;
+            item.className = `p-3 rounded-r-lg border-l-4 ${colorClass} text-sm flex justify-between items-center shadow-sm mb-2 slide-in`;
             item.innerHTML = `
                 <div>
-                    <p class="font-bold text-gray-800">${info.headline}</p>
-                    <p class="text-xs text-gray-500">${info.senderName || 'Sistema'}</p>
+                    <p class="font-bold text-gray-800 uppercase leading-tight">${info.headline}</p>
+                    <p class="text-[10px] text-gray-500 mt-1">${info.senderName || 'Sistema'}</p>
                 </div>
                 <span class="text-xs font-mono text-gray-400 whitespace-nowrap ml-2">${time}</span>
             `;
             container.prepend(item);
+
+            // ¡Aquí está el límite que faltaba! Máximo 5 alertas en el historial
+            if (container.children.length > 5) {
+                container.lastElementChild.remove();
+            }
         }
 
         function updateDashboard(info) {
             const body = document.getElementById("main-body");
-            const side = document.getElementById("severity-side");
-            const iconBg = document.getElementById("severity-icon-bg");
-            const badge = document.getElementById("severity-badge");
+            const card = document.getElementById("alert-card"); 
+            const side = document.getElementById("alert-side-color");
+            const iconBg = document.getElementById("alert-icon-bg");
+            const badge = document.getElementById("alert-badge");
             
-            // Textos
+            // Actualizar Textos
             document.getElementById("headline").innerText = info.headline;
-            document.getElementById("sender").innerText = info.senderName || "Autoridad Competente";
-            document.getElementById("description").innerText = info.description || trans('details.empty');
+            if (document.getElementById("sender")) document.getElementById("sender").innerText = info.senderName || "Autoridad Competente";
+            if (document.getElementById("description")) document.getElementById("description").innerText = info.description || trans('details.empty');
 
-            // Limpiar clases previas
-            body.className = "h-screen w-full transition-colors duration-500 flex flex-col";
-            body.classList.remove("pulse-red");
+            // ¡RECUPERAMOS LOS SENSORES! (Con comprobación de seguridad)
+            if (info.parameter && info.parameter.length > 0) {
+                document.getElementById("sensor-val").innerText = info.parameter[0].value || "--";
+                document.getElementById("sensor-unit").innerText = info.parameter[1]?.value || "";
+            }
+
+            // Limpieza profunda de colores anteriores
+            body.classList.remove("bg-red-50", "bg-amber-50", "bg-[#e9e9e9]");
+            card.classList.remove("pulse-red", "border-red-500", "border-yellow-400", "border-emerald-500");
 
             const sev = info.severity;
+            
+            // Lógica de peligro
             if (sev === "Extreme" || sev === "Severe") {
-                body.classList.add("bg-red-50", "pulse-red");
-                side.className = "w-full h-4 landscape:w-4 landscape:h-auto bg-red-600";
-                iconBg.className = "w-28 h-28 rounded-full bg-red-100 text-red-600 flex items-center justify-center shadow-inner";
-                iconBg.innerHTML = info.headline.includes("FUEGO") ? iconFire : iconAlert; 
+                body.classList.add("bg-red-50");
+                card.classList.add("pulse-red", "border-red-500"); 
+                side.className = "w-full h-4 landscape:w-4 landscape:h-auto bg-red-600 transition-colors duration-500";
+                iconBg.className = "w-28 h-28 rounded-full bg-red-100 text-red-600 flex items-center justify-center shadow-inner transition-colors duration-500";
+                iconBg.innerHTML = info.headline.includes("FUEGO") || info.headline.includes("FIRE") || info.headline.includes("SUTEA") ? iconFire : iconAlert; 
                 badge.className = "px-3 py-1 rounded-full bg-red-600 text-white text-xs font-bold uppercase tracking-wider animate-pulse";
-                badge.innerText = trans('badge.danger');
+                badge.innerText = trans('badge.danger') || 'PELIGRO';
             } 
             else if (sev === "Moderate") {
                 body.classList.add("bg-amber-50");
-                side.className = "w-full h-4 landscape:w-4 landscape:h-auto bg-yellow-400";
-                iconBg.className = "w-28 h-28 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center shadow-inner";
+                card.classList.add("border-yellow-400");
+                side.className = "w-full h-4 landscape:w-4 landscape:h-auto bg-yellow-400 transition-colors duration-500";
+                iconBg.className = "w-28 h-28 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center shadow-inner transition-colors duration-500";
                 iconBg.innerHTML = iconWarning; 
                 badge.className = "px-3 py-1 rounded-full bg-yellow-400 text-yellow-900 text-xs font-bold uppercase tracking-wider";
-                badge.innerText = trans('badge.alert');
+                badge.innerText = trans('badge.alert') || 'ALERTA';
             } 
             else {
                 body.classList.add("bg-[#e9e9e9]");
-                side.className = "w-full h-4 landscape:w-4 landscape:h-auto bg-emerald-500";
-                iconBg.className = "w-28 h-28 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shadow-inner";
+                card.classList.add("border-emerald-500");
+                side.className = "w-full h-4 landscape:w-4 landscape:h-auto bg-emerald-500 transition-colors duration-500";
+                iconBg.className = "w-28 h-28 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shadow-inner transition-colors duration-500";
                 iconBg.innerHTML = iconShield; 
                 badge.className = "px-3 py-1 rounded-full bg-emerald-500 text-white text-xs font-bold uppercase tracking-wider";
-                badge.innerText = trans('badge.safe');
+                badge.innerText = trans('badge.safe') || 'SEGURO';
             }
         }
 
@@ -261,14 +278,16 @@ function t(key: string) {
             }, 5000);
         }
 
-        function onMessageArrived(message) {
+       function onMessageArrived(message) {
             try {
                 const payload = JSON.parse(message.payloadString);
-                const info = payload.alert.info[0];
                 
-                console.log("Alerta recibida:", info.headline);
+                //Buscamos el bloque que coincida con el idioma actual del panel (LANG)
+                const info = payload.alert.info.find(i => i.language === LANG) || payload.alert.info[0];
                 
-                // Disparamos la actualización visual
+                console.log("Alerta procesada en idioma:", info.language);
+                
+                // Actualización visual
                 addToHistory(info);
                 updateDashboard(info);
                 
