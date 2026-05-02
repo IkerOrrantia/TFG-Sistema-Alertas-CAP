@@ -4,6 +4,8 @@ import ssl
 import random
 import os
 import sys
+import datetime
+import uuid
 
 # ==========================================
 # 1. CARGAR CREDENCIALES DESDE EL CONFIG.JSON
@@ -49,51 +51,33 @@ client.connect(BROKER, PORT, 60)
 client.loop_start()
 
 # ==========================================
-# 3. DICCIONARIO DE ALERTAS (MULTI-IDIOMA)
+# 3. DICCIONARIO DE ALERTAS (MULTI-IDIOMA - 4 ESTADOS)
 # ==========================================
 def generar_alerta(opcion):
     alertas = {
         "1": { # ZONA SEGURA (Minor)
-            "val": str(random.randint(18, 22)), "unit": "°C",
-            "es": ["ZONA SEGURA", "Todos los parámetros se encuentran dentro de la normalidad. No hay riesgo inminente.", "Minor", "Sistema Automatizado"],
-            "en": ["SAFE ZONE", "All parameters are within normal ranges. No imminent risk.", "Minor", "Automated System"],
-            "eu": ["EREMU SEGURUA", "Parametro guztiak normaltasunaren barruan daude. Ez dago berehalako arriskurik.", "Minor", "Sistema Automatizatua"],
-            "pt": ["ZONA SEGURA", "Todos os parâmetros estão dentro da normalidade. Nenhum risco iminente.", "Minor", "Sistema Automatizado"]
+            "es": ["ESTADO SEGURO", "Todos los parámetros se encuentran dentro de la normalidad. No hay riesgo inminente.", "Minor", "Sistema Automatizado"],
+            "en": ["SAFE STATE", "All parameters are within normal limits. No imminent risk.", "Minor", "Automated System"],
+            "eu": ["GUNE SEGURUA", "Parametro guztiak normaltasunaren barruan daude. Ez dago berehalako arriskurik.", "Minor", "Sistema Automatizatua"],
+            "pt": ["ESTADO SEGURO", "Todos os parâmetros estão dentro da normalidade. Nenhum risco iminente.", "Minor", "Sistema Automatizado"]
         },
-        "2": { # CALIDAD DEL AIRE (Moderate)
-            "val": str(random.randint(150, 190)), "unit": "AQI",
-            "es": ["ALERTA TOXICOLÓGICA", "Calidad del aire perjudicial. Se recomienda el uso de mascarilla FPP2 y cerrar ventanas.", "Moderate", "Estación Meteorológica"],
-            "en": ["TOXIC ALERT", "Unhealthy air quality. FPP2 mask usage and closing windows recommended.", "Moderate", "Weather Station"],
-            "eu": ["ALERTA TOXIKOLOGIKOA", "Airearen kalitate kaltegarria. FPP2 maskara erabiltzea eta leihoak ixtea gomendatzen da.", "Moderate", "Estazio Meteorologikoa"],
-            "pt": ["ALERTA TOXICOLÓGICO", "Qualidade do ar prejudicial. Recomenda-se o uso de máscara FPP2 e fechar janelas.", "Moderate", "Estação Meteorológica"]
+        "2": { # INCENDIO (Extreme)
+            "es": ["ALERTA DE INCENDIO", "Fuego detectado en las instalaciones. Evacue el edificio inmediatamente usando las escaleras.", "Extreme", "Sensor Térmico T-42"],
+            "en": ["FIRE ALERT", "Fire detected on premises. Evacuate the building immediately using the stairs.", "Extreme", "Thermal Sensor T-42"],
+            "eu": ["SUTE ALERTA", "Sutea aurkitu da. Eraikina hustu berehala eskailerak erabiliz.", "Extreme", "Sentsore Termikoa T-42"],
+            "pt": ["ALERTA DE INCÊNDIO", "Fogo detetado nas instalações. Evacue o edifício imediatamente usando as escadas.", "Extreme", "Sensor Térmico T-42"]
         },
-        "3": { # TEMPORAL / INUNDACIÓN (Moderate)
-            "val": str(random.randint(80, 120)), "unit": "mm/h",
-            "es": ["ALERTA POR LLUVIAS", "Precipitaciones intensas. Peligro de inundación en plantas bajas y garajes.", "Moderate", "AEMET"],
-            "en": ["HEAVY RAIN WARNING", "Intense rainfall. Flooding danger in ground floors and garages.", "Moderate", "AEMET"],
-            "eu": ["EURI ALERTA", "Prezipitazio handiak. Beheko solairuetan eta garajeetan uholde arriskua.", "Moderate", "Euskalmet"],
-            "pt": ["ALERTA DE CHUVA", "Precipitações intensas. Perigo de inundação no térreo e garagens.", "Moderate", "IPMA"]
+        "3": { # TERREMOTO (Severe)
+            "es": ["ALERTA DE TERREMOTO", "Actividad sísmica detectada. Aléjese de las ventanas y busque refugio bajo una estructura sólida.", "Severe", "Instituto Sismológico"],
+            "en": ["EARTHQUAKE ALERT", "Seismic activity detected. Move away from windows and take cover under a sturdy desk or table.", "Severe", "Seismological Institute"],
+            "eu": ["LURRIKARA ALERTA", "Jarduera sismikoa detektatu da. Urrrundu leihoetatik eta babestu mahai baten azpian.", "Severe", "Institutu Sismologikoa"],
+            "pt": ["ALERTA DE SISMO", "Atividade sísmica detetada. Afaste-se das janelas e procure abrigo debaixo de uma mesa sólida.", "Severe", "Instituto Sismológico"]
         },
-        "4": { # INCENDIO (Extreme)
-            "val": str(random.randint(250, 450)), "unit": "°C",
-            "es": ["FUEGO INDUSTRIAL", "Incendio detectado en el sector norte. Evacúe el edificio inmediatamente usando las escaleras.", "Extreme", "Sensor Térmico T-42"],
-            "en": ["INDUSTRIAL FIRE", "Fire detected in the north sector. Evacuate the building immediately using the stairs.", "Extreme", "Thermal Sensor T-42"],
-            "eu": ["SUTE INDUSTRIALA", "Sutea detektatu da iparraldeko sektorean. Ebakuatu eraikina berehala eskailerak erabiliz.", "Extreme", "Sentsore Termikoa T-42"],
-            "pt": ["FOGO INDUSTRIAL", "Incêndio detectado no setor norte. Evacue o edifício imediatamente usando as escadas.", "Extreme", "Sensor Térmico T-42"]
-        },
-        "5": { # INTRUSIÓN (Severe)
-            "val": "1", "unit": "BREACH",
-            "es": ["INTRUSIÓN DETECTADA", "Brecha de seguridad en el perímetro sur. Personal de seguridad en camino. Manténgase a salvo.", "Severe", "Alarma Perimetral"],
-            "en": ["INTRUSION DETECTED", "Security breach in the south perimeter. Security personnel en route. Stay safe.", "Severe", "Perimeter Alarm"],
-            "eu": ["INTRUSIOA DETEKTATUTA", "Segurtasun haustura hegoaldeko perimetroan. Segurtasun langileak bidean. Mantendu seguru.", "Severe", "Perimetroko Alarma"],
-            "pt": ["INTRUSÃO DETECTADA", "Violação de segurança no perímetro sul. Equipe de segurança a caminho. Mantenha-se seguro.", "Severe", "Alarme Perimetral"]
-        },
-        "6": { # FUGA QUÍMICA (Extreme)
-            "val": str(random.randint(400, 600)), "unit": "PPM",
-            "es": ["FUGA DE GAS AMONIACO", "Niveles letales detectados. Evacuación obligatoria. Siga las rutas de escape iluminadas.", "Extreme", "Sensor de Gases C-09"],
-            "en": ["AMMONIA GAS LEAK", "Lethal levels detected. Mandatory evacuation. Follow the illuminated escape routes.", "Extreme", "Gas Sensor C-09"],
-            "eu": ["AMONIAKO GAS ISURIA", "Maila hilgarriak detektatu dira. Nahitaezko ebakuazioa. Jarraitu argiztatutako ihesbideak.", "Extreme", "Gas Sentsorea C-09"],
-            "pt": ["VAZAMENTO DE GÁS AMÔNIA", "Níveis letais detectados. Evacuação obrigatória. Siga as rotas de fuga iluminadas.", "Extreme", "Sensor de Gás C-09"]
+        "4": { # CALIDAD DEL AIRE (Moderate)
+            "es": ["MALA CALIDAD DEL AIRE", "Niveles críticos de contaminación exterior. Cierre puertas y ventanas y evite salir.", "Moderate", "Estación Meteorológica"],
+            "en": ["POOR AIR QUALITY", "Critical levels of outdoor pollution. Close doors and windows and avoid going outside.", "Moderate", "Weather Station"],
+            "eu": ["AIREAREN KALITATE TXARRA", "Kutsadura maila kritikoa. Itxi ateak eta leihoak eta saihestu kalera irtetea.", "Moderate", "Estazio Meteorologikoa"],
+            "pt": ["MÁ QUALIDADE DO AR", "Níveis críticos de poluição exterior. Feche portas e janelas e evite sair.", "Moderate", "Estação Meteorológica"]
         }
     }
 
@@ -103,18 +87,34 @@ def generar_alerta(opcion):
     data = alertas[opcion]
     info_list = []
     
-    # Construimos el formato CAP para cada idioma
+    # TIMESTAMP CAP ESTÁNDAR
+    ahora = datetime.datetime.utcnow().isoformat() + "-00:00"
+    
+    # Nivel de severidad para el tipo de mensaje
+    severidad_base = data["es"][2]
+
+    # Construimos el formato para cada idioma SIN datos inventados (parameter)
     for lang in ["es", "en", "eu", "pt"]:
         info_list.append({
             "language": lang,
             "headline": data[lang][0],
             "description": data[lang][1],
             "severity": data[lang][2],
-            "senderName": data[lang][3],
-            "parameter": [{"value": data["val"]}, {"value": data["unit"]}]
+            "senderName": data[lang][3]
         })
 
-    return {"alert": {"info": info_list}}
+    # Empaquetamos bajo el estándar CAP
+    return {
+        "alert": {
+            "identifier": str(uuid.uuid4()),
+            "sender": "retimf-python-backend@deusto.es",
+            "sent": ahora,
+            "status": "Actual",
+            "msgType": "Alert" if severidad_base != "Minor" else "Update",
+            "scope": "Public",
+            "info": info_list
+        }
+    }
 
 # ==========================================
 # 4. BUCLE DE CONTROL MANUAL (MENÚ)
@@ -124,16 +124,14 @@ print(" 🎛️ PANEL DE SIMULACIÓN DE EMERGENCIAS (TFG)")
 print("="*50)
 
 while True:
-    print("\nOpciones de disparo:")
+    print("\nOpciones de disparo (Estados Restringidos):")
     print(" [1] 🟢 Estado Seguro (Normalidad)")
-    print(" [2] 🟠 Calidad del Aire (Moderada)")
-    print(" [3] 🟠 Lluvias / Inundación (Moderada)")
-    print(" [4] 🔴 Incendio Industrial (Extremo)")
-    print(" [5] 🔴 Intrusión de Seguridad (Severo)")
-    print(" [6] 🔴 Fuga Química de Gas (Extremo)")
+    print(" [2] 🔴 Alerta de Incendio (Extremo)")
+    print(" [3] 🔴 Alerta de Terremoto (Severo)")
+    print(" [4] 🟠 Mala Calidad del Aire (Moderada)")
     print(" [0] Salir del simulador")
     
-    seleccion = input("\nElige una opción (0-6) y pulsa Enter: ")
+    seleccion = input("\nElige una opción (0-4) y pulsa Enter: ")
     
     if seleccion == "0":
         print("Cerrando simulador...")
@@ -142,11 +140,11 @@ while True:
     payload = generar_alerta(seleccion)
     
     if payload:
-        mensaje_json = json.dumps(payload)
+        mensaje_json = json.dumps(payload, ensure_ascii=False)
         client.publish(TOPIC, mensaje_json)
-        print(f"📡 ¡Alerta enviada correctamente al Tótem!")
+        print(f"📡 ¡Alerta '{payload['alert']['info'][0]['headline']}' enviada correctamente al Tótem!")
     else:
-        print("⚠️ Opción no válida. Por favor, elige un número del 0 al 6.")
+        print("⚠️ Opción no válida. Por favor, elige un número del 0 al 4.")
 
 client.loop_stop()
 client.disconnect()
