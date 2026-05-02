@@ -81,43 +81,59 @@ function t(key: string) {
             </div>
         </section>
 
-        <div class="grid grid-cols-1 landscape:grid-cols-3 gap-6 flex-1">
+        <div class="grid grid-cols-1 landscape:grid-cols-3 gap-6 flex-1 min-h-0">
             
-            <section class="landscape:col-span-2 bg-white rounded-2xl border border-gray-200 shadow-sm p-6 flex flex-col justify-between">
-                <div>
-                    <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
-                        <span class="bg-blue-100 text-blue-600 p-1.5 rounded">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" /></svg>
-                        </span> {t('details.title')}
-                    </h3>
-                    <p id="description" class="text-lg text-gray-600 mb-6">{t('details.empty')}</p>
-                </div>
-            </section>
-
-            <div class="flex flex-col gap-6">
-                <section class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 flex-1 overflow-hidden flex flex-col min-h-[300px]">
-                    <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
-                        <span class="bg-yellow-100 text-yellow-600 p-1.5 rounded">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                        </span> {t('history.title')}
-                    </h3>
-                    
-                    <div id="history-container" class="space-y-3 overflow-y-auto pr-2 flex-1">
-                        <div class="text-center text-gray-400 text-sm py-4 italic">{t('history.empty')}</div>
-                    </div>
-                </section>
-
-                <button class="bg-red-600 text-white rounded-2xl p-4 shadow-lg flex items-center justify-between hover:scale-[1.02] transition-transform flex-shrink-0">
-                    <div class="text-left">
-                        <p class="text-xs font-bold uppercase text-red-100 opacity-80">Emergency SOS</p>
-                        <p class="text-3xl font-black">112 / 911</p>
-                    </div>
-                    <div class="text-white opacity-90">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-2.896-1.596-5.48-4.18-7.076-7.076l1.293-.97c.362-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" /></svg>
-                    </div>
-                </button>
-            </div>
-        </div>
+            <!-- TARJETA DEL VÍDEO (2 columnas en horizontal) -->
+            <section class="landscape:col-span-2 bg-white rounded-2xl border border-gray-200 shadow-sm p-6 flex flex-col h-full">
+                 <!-- TEXTO ARRIBA -->
+                 <div class="mb-4">
+                     <h3 class="text-lg font-bold text-slate-800 mb-2 flex items-center gap-2">
+                         <span class="bg-blue-100 text-blue-600 p-1.5 rounded">
+                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" /></svg>
+                         </span> {t('details.title')}
+                     </h3>
+                     <p id="description" class="text-lg text-gray-600 leading-tight">{t('details.empty')}</p>
+                 </div>
+ 
+                 <!-- CONTENEDOR DEL VÍDEO (Limpio y sin bordes grises) -->
+                 <div class="flex-1 w-full relative min-h-[220px]">
+                     <!-- Al quitar bg-slate-50 y shadow-inner, el vídeo se funde con el fondo blanco -->
+                     <video id="mascot-video" class="absolute inset-0 w-full h-full object-contain p-2" autoplay loop muted playsinline>
+                         <source id="mascot-source" src="/mascota-idle.mp4" type="video/mp4" />
+                         Tu navegador no soporta video HTML5.
+                     </video>
+                 </div>
+             </section>
+ 
+             <!-- COLUMNA DERECHA / INFERIOR (Historial + SOS separados) -->
+             <div class="flex flex-col gap-6">
+                 
+                 <!-- TARJETA DEL HISTORIAL (Ocupará el espacio disponible) -->
+                 <section class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 flex flex-col flex-1 min-h-[160px]">
+                     <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+                         <span class="bg-yellow-100 text-yellow-600 p-1.5 rounded">
+                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                         </span> {t('history.title')}
+                     </h3>
+                     
+                     <div id="history-container" class="space-y-3 overflow-y-hidden flex-1">
+                         <div class="text-center text-gray-400 text-sm py-4 italic">{t('history.empty')}</div>
+                     </div>
+                 </section>
+                 
+                 <!-- BOTÓN SOS (Fijo al fondo) -->
+                 <div class="bg-red-600 text-white rounded-2xl p-5 shadow-lg flex items-center justify-between flex-shrink-0">
+                     <div class="text-left">
+                         <p class="text-xs font-bold uppercase text-red-100 opacity-80">Emergency SOS</p>
+                         <p class="text-3xl font-black">112 / 911</p>
+                     </div>
+                     <div class="text-white opacity-90">
+                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-2.896-1.596-5.48-4.18-7.076-7.076l1.293-.97c.362-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" /></svg>
+                     </div>
+                 </div>
+ 
+             </div>
+         </div>
     </main>
     </main>
 
@@ -226,6 +242,61 @@ function t(key: string) {
                 iconBg.innerHTML = iconShield; 
                 badge.className = "px-3 py-1 rounded-full bg-emerald-500 text-white text-xs font-bold uppercase tracking-wider";
                 badge.innerText = trans('badge.safe') || 'SEGURO';
+            }
+            // LÓGICA DINÁMICA DE LA MASCOTA
+            const mascotVideo = document.getElementById("mascot-video");
+            const mascotSource = document.getElementById("mascot-source");
+
+            if (mascotVideo && mascotSource) {
+                // 1. Definimos los 4 vídeos de estado "Seguro"
+                const idleVideos = [
+                    "/mascota-descansando.mp4",
+                    "/mascota-sol.mp4",
+                    "/mascota-leyendo.mp4",
+                    "/mascota-saludando.mp4"
+                ];
+                
+                let newVideoSrc = "";
+                
+                // 2. Lógica según el tipo de Alerta
+                if (sev === "Extreme" || sev === "Severe" || sev === "Moderate") {
+                    const titular = (info.headline || "").toUpperCase();
+                    
+                    if (titular.includes("FUEGO") || titular.includes("FIRE") || titular.includes("INCENDIO")) {
+                        newVideoSrc = "/mascota-incendio.mp4"; // Ej: Mascota con extintor/mascarilla
+                    } 
+                    else if (titular.includes("TERREMOTO") || titular.includes("EARTHQUAKE") || titular.includes("SEISMO") || titular.includes("SISMO")) {
+                        newVideoSrc = "/mascota-terremoto.mp4"; // Ej: Mascota agachada bajo una mesa (Triángulo de la vida)
+                    } 
+                    else if (titular.includes("AIRE") || titular.includes("AIR") || titular.includes("CONTAMINACION")) {
+                        newVideoSrc = "/mascota-aire.mp4"; // Ej: Mascota mirando el móvil o cerrando la ventana
+                    } 
+                    else {
+                        // Fallback de seguridad por si llega algo raro
+                        newVideoSrc = "/mascota-alerta-general.mp4"; 
+                    }
+                } else {
+                    // 3. ESTADO SEGURO: Elegir vídeo aleatorio inteligentemente
+                    const currentSrc = mascotSource.getAttribute("src");
+                    const isAlreadyIdle = idleVideos.some(video => currentSrc.includes(video));
+                    
+                    if (isAlreadyIdle) {
+                        // Si ya está reproduciendo un vídeo "idle", lo mantenemos para no darle cortes
+                        // (El loop de HTML5 se encargará de repetirlo suavemente)
+                        newVideoSrc = currentSrc; 
+                    } else {
+                        // Si venimos de una alerta y pasamos a "Seguro", elegimos uno aleatorio
+                        const randomIndex = Math.floor(Math.random() * idleVideos.length);
+                        newVideoSrc = idleVideos[randomIndex];
+                    }
+                }
+
+                // 4. Inyectamos el vídeo solo si ha cambiado
+                if (!mascotSource.src.endsWith(newVideoSrc)) {
+                    mascotSource.setAttribute("src", newVideoSrc);
+                    mascotVideo.load(); // Fuerza al navegador a cargar el nuevo MP4
+                    mascotVideo.play().catch(e => console.warn("Autoplay bloqueado:", e));
+                }
             }
         }
 
