@@ -73,10 +73,24 @@ function t(key: string) {
                     <h2 id="headline" class="text-5xl font-black leading-none text-slate-900 mb-4 uppercase tracking-tight">{t('status.init')}</h2>
                 </div>
 
-                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 text-center min-w-[160px] w-full landscape:w-auto mt-4 landscape:mt-0">
-                    <p class="text-xs text-gray-500 uppercase font-bold mb-1">{t('sensor.label')}</p>
-                    <p id="sensor-val" class="text-5xl font-black text-slate-800 font-mono">--</p>
-                    <p id="sensor-unit" class="text-sm text-gray-400 font-bold">--</p>
+                <div class="flex gap-4 w-full max-w-sm mt-2">
+                    <!-- Sensor: Temperatura -->
+                    <div class="bg-slate-50 border border-slate-200 rounded-xl flex-1 py-3 text-center shadow-sm">
+                        <p class="text-[9px] text-gray-500 uppercase font-black tracking-widest mb-1">{t('sensor.temp')}</p>
+                        <div class="flex items-baseline justify-center gap-1">
+                            <p id="sensor-temp-val" class="text-4xl font-black text-slate-800 font-mono">--</p>
+                            <p class="text-sm text-gray-400 font-bold">°C</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Sensor: Calidad del Aire (AQI) -->
+                    <div class="bg-slate-50 border border-slate-200 rounded-xl flex-1 py-3 text-center shadow-sm">
+                        <p class="text-[9px] text-gray-500 uppercase font-black tracking-widest mb-1">{t('sensor.aqi')}</p>
+                        <div class="flex items-baseline justify-center gap-1">
+                            <p id="sensor-aqi-val" class="text-4xl font-black text-slate-800 font-mono">--</p>
+                            <p class="text-sm text-gray-400 font-bold">AQI</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -153,7 +167,133 @@ function t(key: string) {
         const iconAlert = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>`;
         const iconWarning = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>`;
         const iconShield = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`;
-        
+
+        // Variables globales para guardar el clima y AQI y usarlos en los vídeos
+        window.climaLocal = {
+            llueve: false,
+            aqi: 0
+        };
+
+        // 1.5 API METEOROLÓGICA
+        async function fetchLocalTelemetry() {
+            try {
+                // Coordenadas dinámicas obtenidas desde config.json
+                // Si por algún motivo no existen, usamos Lisboa por defecto
+                const lat = credenciales.LAT || "38.7167";
+                const lon = credenciales.LON || "-9.1333";
+                
+                // 1. Petición de Temperatura
+                const tempResponse = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m`);
+                const tempData = await tempResponse.json();
+                
+                // 2. Petición de Calidad del Aire (AQI Europeo)
+                const aqiResponse = await fetch(`https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${lat}&longitude=${lon}&current=european_aqi`);
+                const aqiData = await aqiResponse.json();
+
+                // 3. Actualizar el DOM
+                if (tempData.current) {
+                    const temp = Math.round(tempData.current.temperature_2m);
+                    const codigoClima = tempData.current.weather_code;
+                    document.getElementById('sensor-temp-val').innerText = temp;
+                    
+                    // Códigos WMO: 51 en adelante implican lluvia, chubascos, nieve o tormenta
+                    window.climaLocal.llueve = (codigoClima >= 51 && codigoClima <= 99);
+                }
+                
+                if (aqiData.current) {
+                    const aqi = Math.round(aqiData.current.european_aqi);
+                    window.climaLocal.aqi = aqi;
+                    const aqiElement = document.getElementById('sensor-aqi-val');
+                    aqiElement.innerText = aqi;
+                    
+                    if (aqi > 80) aqiElement.className = "text-4xl font-black text-red-600 font-mono";
+                    else if (aqi > 50) aqiElement.className = "text-4xl font-black text-yellow-600 font-mono";
+                    else aqiElement.className = "text-4xl font-black text-slate-800 font-mono";
+                }
+                
+                const badge = document.getElementById("alert-badge");
+                if (badge && badge.innerText.includes(trans('badge.safe') || 'SEGURO')) {
+                    actualizarVideoMascota("Minor", ""); 
+                }
+                console.log(`Telemetría obtenida correctamente para coords: ${lat}, ${lon}`);
+            } catch (error) {
+                console.error("Error al obtener datos meteorológicos:", error);
+            }
+        }
+
+        // 1.6 CONTROLADOR MULTIMEDIA (Transiciones)
+        function actualizarVideoMascota(severidad, titular) {
+            const mascotVideo = document.getElementById("mascot-video");
+            const mascotSource = document.getElementById("mascot-source");
+
+            if (!mascotVideo || !mascotSource) return;
+
+            let transicion = "";
+            let bucle = "";
+
+            if (severidad === "Extreme" || severidad === "Severe" || severidad === "Moderate") {
+                titular = titular.toUpperCase();
+                
+                if (titular.includes("FUEGO") || titular.includes("FIRE") || titular.includes("INCENDIO")) {
+                    transicion = "/V_Fuego.mp4";
+                    bucle = "/V_Simulacro_Fuego.mp4";
+                } 
+                else if (titular.includes("TERREMOTO") || titular.includes("EARTHQUAKE") || titular.includes("SEISMO") || titular.includes("SISMO")) {
+                    transicion = "/V_Terremoto.mp4";
+                    bucle = "/V_Simulacro_Terremoto.mp4";
+                } 
+                else if (titular.includes("AIRE") || titular.includes("AIR") || titular.includes("CONTAMINACION")) {
+                    // Verificamos el nivel de contaminación real que descargó la API
+                    if (window.climaLocal.aqi > 80) {
+                        transicion = "/V_CalidadAire_Severo.mp4"; 
+                        bucle = transicion; 
+                    } else {
+                        transicion = "/V_CalidadAire_Leve.mp4"; 
+                        bucle = transicion; 
+                    }
+                } 
+            } else {
+                // ESTADO SEGURO (Depende del clima local)
+                transicion = window.climaLocal.llueve ? "/V_Lluvia.mp4" : "/V_Sol.mp4";
+                bucle = transicion; // El estado normal siempre es un bucle continuo
+            }
+
+            // Evitamos reiniciar la animación si ya estamos reproduciendo el vídeo correcto
+            const srcActual = mascotSource.getAttribute("src");
+            if (srcActual.includes(transicion) || srcActual.includes(bucle)) {
+                return; 
+            }
+
+            // Limpiamos eventos anteriores para que no se vuelvan locos
+            mascotVideo.onended = null;
+
+            // 1. Cargar y reproducir la transición
+            mascotSource.setAttribute("src", transicion);
+            
+            // Si la transición y el bucle son distintos, quitamos el loop de HTML
+            if (transicion !== bucle) {
+                mascotVideo.loop = false; 
+                
+                // EVENTO: Cuando termine la transición, cambiamos al simulacro y lo ponemos en bucle
+                mascotVideo.onended = () => {
+                    mascotSource.setAttribute("src", bucle);
+                    mascotVideo.loop = true;
+                    mascotVideo.load();
+                    mascotVideo.play().catch(e => console.warn(e));
+                };
+            } else {
+                // Si es estado normal o aire (que no tienen 2 vídeos), activamos bucle desde el principio
+                mascotVideo.loop = true; 
+            }
+
+            mascotVideo.load();
+            mascotVideo.play().catch(e => console.warn("Autoplay bloqueado:", e));
+        }
+
+        // Ejecutar inmediatamente al cargar y luego cada 15 minutos (900000 ms)
+        fetchLocalTelemetry();
+        setInterval(fetchLocalTelemetry, 900000);
+
         // 2. CREDENCIALES
         const BROKER = credenciales.BROKER; 
         const PORT = Number(credenciales.PORT); 
@@ -185,7 +325,6 @@ function t(key: string) {
             `;
             container.prepend(item);
 
-            // ¡Aquí está el límite que faltaba! Máximo 5 alertas en el historial
             if (container.children.length > 2) {
                 container.lastElementChild.remove();
             }
@@ -202,12 +341,6 @@ function t(key: string) {
             document.getElementById("headline").innerText = info.headline;
             if (document.getElementById("sender")) document.getElementById("sender").innerText = info.senderName || "Autoridad Competente";
             if (document.getElementById("description")) document.getElementById("description").innerText = info.description || trans('details.empty');
-
-            // ¡RECUPERAMOS LOS SENSORES! (Con comprobación de seguridad)
-            if (info.parameter && info.parameter.length > 0) {
-                document.getElementById("sensor-val").innerText = info.parameter[0].value || "--";
-                document.getElementById("sensor-unit").innerText = info.parameter[1]?.value || "";
-            }
 
             // Limpieza profunda de colores anteriores
             body.classList.remove("bg-red-50", "bg-amber-50", "bg-[#e9e9e9]");
@@ -243,61 +376,7 @@ function t(key: string) {
                 badge.className = "px-3 py-1 rounded-full bg-emerald-500 text-white text-xs font-bold uppercase tracking-wider";
                 badge.innerText = trans('badge.safe') || 'SEGURO';
             }
-            // LÓGICA DINÁMICA DE LA MASCOTA
-            const mascotVideo = document.getElementById("mascot-video");
-            const mascotSource = document.getElementById("mascot-source");
-
-            if (mascotVideo && mascotSource) {
-                // 1. Definimos los 4 vídeos de estado "Seguro"
-                const idleVideos = [
-                    "/mascota-descansando.mp4",
-                    "/mascota-sol.mp4",
-                    "/mascota-leyendo.mp4",
-                    "/mascota-saludando.mp4"
-                ];
-                
-                let newVideoSrc = "";
-                
-                // 2. Lógica según el tipo de Alerta
-                if (sev === "Extreme" || sev === "Severe" || sev === "Moderate") {
-                    const titular = (info.headline || "").toUpperCase();
-                    
-                    if (titular.includes("FUEGO") || titular.includes("FIRE") || titular.includes("INCENDIO")) {
-                        newVideoSrc = "/mascota-incendio.mp4"; // Ej: Mascota con extintor/mascarilla
-                    } 
-                    else if (titular.includes("TERREMOTO") || titular.includes("EARTHQUAKE") || titular.includes("SEISMO") || titular.includes("SISMO")) {
-                        newVideoSrc = "/mascota-terremoto.mp4"; // Ej: Mascota agachada bajo una mesa (Triángulo de la vida)
-                    } 
-                    else if (titular.includes("AIRE") || titular.includes("AIR") || titular.includes("CONTAMINACION")) {
-                        newVideoSrc = "/mascota-aire.mp4"; // Ej: Mascota mirando el móvil o cerrando la ventana
-                    } 
-                    else {
-                        // Fallback de seguridad por si llega algo raro
-                        newVideoSrc = "/mascota-alerta-general.mp4"; 
-                    }
-                } else {
-                    // 3. ESTADO SEGURO: Elegir vídeo aleatorio inteligentemente
-                    const currentSrc = mascotSource.getAttribute("src");
-                    const isAlreadyIdle = idleVideos.some(video => currentSrc.includes(video));
-                    
-                    if (isAlreadyIdle) {
-                        // Si ya está reproduciendo un vídeo "idle", lo mantenemos para no darle cortes
-                        // (El loop de HTML5 se encargará de repetirlo suavemente)
-                        newVideoSrc = currentSrc; 
-                    } else {
-                        // Si venimos de una alerta y pasamos a "Seguro", elegimos uno aleatorio
-                        const randomIndex = Math.floor(Math.random() * idleVideos.length);
-                        newVideoSrc = idleVideos[randomIndex];
-                    }
-                }
-
-                // 4. Inyectamos el vídeo solo si ha cambiado
-                if (!mascotSource.src.endsWith(newVideoSrc)) {
-                    mascotSource.setAttribute("src", newVideoSrc);
-                    mascotVideo.load(); // Fuerza al navegador a cargar el nuevo MP4
-                    mascotVideo.play().catch(e => console.warn("Autoplay bloqueado:", e));
-                }
-            }
+            actualizarVideoMascota(sev, info.headline || "");
         }
 
         // 4. FUNCIONES MQTT 

@@ -11,7 +11,9 @@ export const ui = {
         'history.empty': 'No hay eventos recientes',
         'badge.danger': 'PELIGRO',
         'badge.alert': 'ALERTA',
-        'badge.safe': 'SEGURO'
+        'badge.safe': 'SEGURO',
+        'sensor.temp': 'TEMP. LOCAL',
+        'sensor.aqi': 'AQI (AIRE)'
     },
     en: {
         'nav.title': 'Monitoring Center',
@@ -25,7 +27,9 @@ export const ui = {
         'history.empty': 'No recent events',
         'badge.danger': 'DANGER',
         'badge.alert': 'ALERT',
-        'badge.safe': 'SAFE'
+        'badge.safe': 'SAFE',
+        'sensor.temp': 'LOCAL TEMP',
+        'sensor.aqi': 'AQI (AIR)'
     },
     eu: {
         'nav.title': 'Jarraipen Zentroa',
@@ -39,7 +43,9 @@ export const ui = {
         'history.empty': 'Ez dago azken gertaerarik',
         'badge.danger': 'ARRISKUA',
         'badge.alert': 'ALERTA',
-        'badge.safe': 'SEGURUA'
+        'badge.safe': 'SEGURUA',
+        'sensor.temp': 'TOKIKO TENP.',
+        'sensor.aqi': 'AQI (AIREA)'
     },
     pt: {
         'nav.title': 'Centro de Monitorização',
@@ -53,6 +59,8 @@ export const ui = {
         'history.empty': 'Não há eventos recentes',
         'badge.danger': 'PERIGO',
         'badge.alert': 'ALERTA',
-        'badge.safe': 'SEGURO'
+        'badge.safe': 'SEGURO',
+        'sensor.temp': 'TEMP. LOCAL',
+        'sensor.aqi': 'AQI (AR)'
     }
 };
