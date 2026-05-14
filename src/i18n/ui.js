@@ -13,7 +13,13 @@ export const ui = {
         'badge.alert': 'ALERTA',
         'badge.safe': 'SEGURO',
         'sensor.temp': 'TEMP. LOCAL',
-        'sensor.aqi': 'AQI (AIRE)'
+        'sensor.aqi': 'AQI (AIRE)',
+        'aqi.good': 'Calidad Buena',
+        'aqi.moderate': 'Moderada',
+        'aqi.sensitive': 'Grupos Sensibles',
+        'aqi.bad': 'Calidad Mala',
+        'aqi.very_bad': 'Muy Mala',
+        'aqi.hazardous': 'Peligrosa'
     },
     en: {
         'nav.title': 'Monitoring Center',
@@ -29,7 +35,13 @@ export const ui = {
         'badge.alert': 'ALERT',
         'badge.safe': 'SAFE',
         'sensor.temp': 'LOCAL TEMP',
-        'sensor.aqi': 'AQI (AIR)'
+        'sensor.aqi': 'AQI (AIR)',
+        'aqi.good': 'Good Quality',
+        'aqi.moderate': 'Moderate',
+        'aqi.sensitive': 'Sensitive Groups',
+        'aqi.bad': 'Poor Quality',
+        'aqi.very_bad': 'Very Poor',
+        'aqi.hazardous': 'Hazardous'
     },
     eu: {
         'nav.title': 'Jarraipen Zentroa',
@@ -45,7 +57,13 @@ export const ui = {
         'badge.alert': 'ALERTA',
         'badge.safe': 'SEGURUA',
         'sensor.temp': 'TOKIKO TENP.',
-        'sensor.aqi': 'AQI (AIREA)'
+        'sensor.aqi': 'AQI (AIREA)',
+        'aqi.good': 'Kalitate Ona',
+        'aqi.moderate': 'Ertaina',
+        'aqi.sensitive': 'Talde Sentikorrak',
+        'aqi.bad': 'Kalitate Txarra',
+        'aqi.very_bad': 'Oso Txarra',
+        'aqi.hazardous': 'Arriskutsua'
     },
     pt: {
         'nav.title': 'Centro de Monitorização',
@@ -61,6 +79,12 @@ export const ui = {
         'badge.alert': 'ALERTA',
         'badge.safe': 'SEGURO',
         'sensor.temp': 'TEMP. LOCAL',
-        'sensor.aqi': 'AQI (AR)'
+        'sensor.aqi': 'AQI (AR)',
+        'aqi.good': 'Qualidade Boa',
+        'aqi.moderate': 'Moderada',
+        'aqi.sensitive': 'Grupos Sensíveis',
+        'aqi.bad': 'Qualidade Má',
+        'aqi.very_bad': 'Muito Má',
+        'aqi.hazardous': 'Perigosa'
     }
 };

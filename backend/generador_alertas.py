@@ -1,3 +1,5 @@
+from time import sleep
+
 import paho.mqtt.client as mqtt
 import json
 import ssl
@@ -7,9 +9,7 @@ import sys
 import datetime
 import uuid
 
-# ==========================================
 # 1. CARGAR CREDENCIALES DESDE EL CONFIG.JSON
-# ==========================================
 # Buscamos el config.json en la carpeta raíz (un nivel por encima de 'backend')
 ruta_config = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'config.json'))
 
@@ -32,9 +32,7 @@ USUARIO = credenciales["USUARIO"]
 PASSWORD = credenciales["PASSWORD"]
 TOPIC = credenciales["TOPIC"]
 
-# ==========================================
 # 2. CONEXIÓN MQTT
-# ==========================================
 def on_connect(client, userdata, flags, rc):
     if rc == 0:
         print("\n✅ Conectado al servidor de alertas (HiveMQ) con éxito.")
@@ -88,7 +86,7 @@ def generar_alerta(opcion):
     info_list = []
     
     # TIMESTAMP CAP ESTÁNDAR
-    ahora = datetime.datetime.utcnow().isoformat() + "-00:00"
+    ahora = datetime.datetime.now(datetime.UTC).isoformat()
     
     # Nivel de severidad para el tipo de mensaje
     severidad_base = data["es"][2]
@@ -119,16 +117,17 @@ def generar_alerta(opcion):
 # ==========================================
 # 4. BUCLE DE CONTROL MANUAL (MENÚ)
 # ==========================================
+sleep(1)
 print("\n" + "="*50)
-print(" 🎛️ PANEL DE SIMULACIÓN DE EMERGENCIAS (TFG)")
+print(" 🎛️" + "\t" + "PANEL DE SIMULACIÓN DE EMERGENCIAS")
 print("="*50)
 
 while True:
-    print("\nOpciones de disparo (Estados Restringidos):")
+    print("\nOpciones de disparo:")
     print(" [1] 🟢 Estado Seguro (Normalidad)")
     print(" [2] 🔴 Alerta de Incendio (Extremo)")
-    print(" [3] 🔴 Alerta de Terremoto (Severo)")
-    print(" [4] 🟠 Mala Calidad del Aire (Moderada)")
+    print(" [3] 🟠 Alerta de Terremoto (Severo)")
+    print(" [4] 🟣 Mala Calidad del Aire (Moderada)")
     print(" [0] Salir del simulador")
     
     seleccion = input("\nElige una opción (0-4) y pulsa Enter: ")
