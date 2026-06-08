@@ -196,8 +196,8 @@ function t(key: string) {
         // 1.5 API METEOROLÓGICA
         async function fetchLocalTelemetry() {
             try {
-                const lat = credenciales.LAT || "38.7167";
-                const lon = credenciales.LON || "-9.1333";
+                const lat = credenciales.LAT ;
+                const lon = credenciales.LON ;
                 
                 // Petición de Temperatura (Corregida añadiendo weather_code)
                 const tempResponse = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code`);
