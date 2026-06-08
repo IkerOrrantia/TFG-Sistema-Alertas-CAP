@@ -48,6 +48,7 @@ print("Iniciando conexión segura...")
 client.connect(BROKER, PORT, 60)
 client.loop_start()
 
+
 # ==========================================
 # 3. DICCIONARIO DE ALERTAS (MULTI-IDIOMA - 4 ESTADOS)
 # ==========================================
@@ -105,7 +106,7 @@ def generar_alerta(opcion):
     return {
         "alert": {
             "identifier": str(uuid.uuid4()),
-            "sender": "retimf-python-backend@deusto.es",
+            "sender": "retime-python-backend@deusto.es",
             "sent": ahora,
             "status": "Actual",
             "msgType": "Alert" if severidad_base != "Minor" else "Update",
@@ -113,6 +114,53 @@ def generar_alerta(opcion):
             "info": info_list
         }
     }
+
+# MODO EDUCATIVO (SIMULACRO AUTOMÁTICO)
+def ejecutar_modo_educativo():
+    print("\n" + "="*50)
+    print(" 🎓 INICIANDO MODO EDUCATIVO (DEMO)")
+    print("="*50)
+    print("El sistema emitirá una alerta diferente cada 30 segundos.")
+    print("Presiona Ctrl+C en la terminal para abortar y volver a estado seguro.\n")
+
+    # Lista de tuplas: ("opcion_menu", tiempo_espera_segundos)
+    escenarios = [
+        ("2", 30), # Incendio: 30 segundos
+        ("3", 30), # Terremoto: 30 segundos
+        ("4", 36)  # Calidad del aire: 36 segundos (6 segundos extra)
+    ]
+
+    try:
+        for opcion, tiempo_espera in escenarios:
+            payload = generar_alerta(opcion)
+            headline = payload['alert']['info'][0]['headline']
+            print(f">>> Simulando catástrofe: {headline} (Esperando {tiempo_espera}s)...")
+            
+            mensaje_json = json.dumps(payload, ensure_ascii=False)
+            client.publish(TOPIC, mensaje_json)
+            
+            sleep(tiempo_espera) # El tiempo ahora es dinámico para cada iteración
+
+        print("\n>>> Ciclo educativo finalizado. Restaurando sistema a Modo Seguro (IDLE)...")
+        payload_seguro = generar_alerta("1")
+        client.publish(TOPIC, json.dumps(payload_seguro, ensure_ascii=False))
+
+    except KeyboardInterrupt:
+        print("\n\n[!] Modo Educativo interrumpido por el administrador.")
+        print(">>> Forzando sistema a Modo Seguro (IDLE)...")
+        payload_seguro = generar_alerta("1")
+        client.publish(TOPIC, json.dumps(payload_seguro, ensure_ascii=False))
+        
+    print("="*50 + "\n")
+
+# INICIALIZACIÓN AUTOMÁTICA: ESTADO SEGURO (IDLE)
+sleep(2) # Pequeña pausa para asegurar que la conexión MQTT se ha estabilizado
+print("\n>>> Sincronizando tótems: Enviando Estado Seguro (IDLE) inicial...")
+payload_inicial = generar_alerta("1")
+if payload_inicial:
+    mensaje_json = json.dumps(payload_inicial, ensure_ascii=False)
+    client.publish(TOPIC, mensaje_json, retain=True)
+    print("📡 [✓] Estado Seguro inicial inyectado y retenido en el broker.")
 
 # ==========================================
 # 4. BUCLE DE CONTROL MANUAL (MENÚ)
@@ -128,6 +176,7 @@ while True:
     print(" [2] 🔴 Alerta de Incendio (Extremo)")
     print(" [3] 🟠 Alerta de Terremoto (Severo)")
     print(" [4] 🟣 Mala Calidad del Aire (Moderada)")
+    print(" [5] 🎓 Modo Educativo (Ciclo de Alertas)")
     print(" [0] Salir del simulador")
     
     seleccion = input("\nElige una opción (0-4) y pulsa Enter: ")
@@ -135,6 +184,9 @@ while True:
     if seleccion == "0":
         print("Cerrando simulador...")
         break
+    elif seleccion == "5":
+        ejecutar_modo_educativo()
+        continue
         
     payload = generar_alerta(seleccion)
     
