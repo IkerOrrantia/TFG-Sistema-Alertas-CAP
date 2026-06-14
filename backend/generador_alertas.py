@@ -179,7 +179,7 @@ while True:
     print(" [5] 🎓 Modo Educativo (Ciclo de Alertas)")
     print(" [0] Salir del simulador")
     
-    seleccion = input("\nElige una opción (0-4) y pulsa Enter: ")
+    seleccion = input("\nElige una opción (0-5) y pulsa Enter: ")
     
     if seleccion == "0":
         print("Cerrando simulador...")
