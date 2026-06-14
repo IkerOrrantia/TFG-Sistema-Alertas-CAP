@@ -3,12 +3,20 @@
    Descripción: Monitorización de salud de red y telemetría de alertas.
    ========================================================================= */
 import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import mqtt from 'mqtt';
 import credenciales from './config.json' with { type: 'json' };
 
-const LOG_FILE = 'totem_incidencias.log';
+// --- NUEVO: Obtener la ruta absoluta del directorio actual en ES Modules ---
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
- //  SISTEMA DE LOGGING Y TELEMETRÍA
+// Forzamos a que el archivo se guarde siempre junto a monitor.js
+const LOG_FILE = path.join(__dirname, 'totem_incidencias.log');
+// -------------------------------------------------------------------------
+
+//  SISTEMA DE LOGGING Y TELEMETRÍA
 function logEvent(type, message) {
     const now = new Date();
     const timestamp = now.toISOString().replace('T', ' ').substring(0, 19);
@@ -31,8 +39,7 @@ function logEvent(type, message) {
 }
 
 
- //  CLIENTE MQTT (CONEXIÓN Y ESTADOS)
-
+//  CLIENTE MQTT (CONEXIÓN Y ESTADOS)
 const brokerUrl = `mqtts://${credenciales.BROKER}:8883`;
 const options = {
     clientId: `Vigilante_${Math.random().toString(16).substring(2, 8)}`,
