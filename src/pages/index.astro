@@ -25,11 +25,29 @@ function t(key: string) {
 
     <style>
         body { font-family: 'Inter', sans-serif; }
+
+        /* Pulso Rojo (Incendio) */
         .pulse-red { animation: pulseRed 2s infinite; }
         @keyframes pulseRed { 
             0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); } 
             70% { box-shadow: 0 0 0 20px rgba(220, 38, 38, 0); } 
             100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); } 
+        }
+
+        /* Pulso Naranja (Terremoto) */
+        .pulse-orange { animation: pulseOrange 2s infinite; }
+        @keyframes pulseOrange { 
+            0% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.7); } 
+            70% { box-shadow: 0 0 0 20px rgba(249, 115, 22, 0); } 
+            100% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0); } 
+        }
+
+        /* Pulso Morado (Calidad Aire) */
+        .pulse-purple { animation: pulsePurple 2s infinite; }
+        @keyframes pulsePurple { 
+            0% { box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.7); } 
+            70% { box-shadow: 0 0 0 20px rgba(168, 85, 247, 0); } 
+            100% { box-shadow: 0 0 0 0 rgba(168, 85, 247, 0); } 
         }
         .slide-in { animation: slideIn 0.5s ease-out; }
         @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
@@ -150,9 +168,9 @@ function t(key: string) {
     </main>
 
     <script is:inline define:vars={{ ui, LANG, credenciales }}>
-        // --- NUEVO --- Variables mutables
         let idiomaActual = LANG;
         let ultimoPayload = null;
+        let historialAlertas = [];
         
         // --- NUEVO --- Uso de idiomaActual
         const trans = (key) => ui[idiomaActual][key] || key;
@@ -299,67 +317,98 @@ function t(key: string) {
         const PASSWORD = credenciales.PASSWORD;
         const TOPIC = credenciales.TOPIC;
 
-        function addToHistory(info) {
+        function renderHistory() {
             const container = document.getElementById("history-container");
-            const time = new Date().toLocaleTimeString('es-ES', {hour: '2-digit', minute:'2-digit'});
+            container.innerHTML = ''; // Limpiamos el historial actual
             
-            const emptyMsg = container.querySelector('.italic');
-            if(emptyMsg) emptyMsg.remove();
-
-            let colorClass = "border-l-emerald-500 bg-emerald-50";
-            if (info.severity === "Extreme" || info.severity === "Severe") colorClass = "border-l-red-500 bg-red-50";
-            else if (info.severity === "Moderate") colorClass = "border-l-yellow-400 bg-amber-50";
-
-            const item = document.createElement("div");
-            item.className = `p-3 rounded-r-lg border-l-4 ${colorClass} text-sm flex justify-between items-center shadow-sm mb-2 slide-in`;
-            item.innerHTML = `
-                <div>
-                    <p class="font-bold text-gray-800 uppercase leading-tight">${info.headline}</p>
-                    <p class="text-[10px] text-gray-500 mt-1">${info.senderName || 'Sistema'}</p>
-                </div>
-                <span class="text-xs font-mono text-gray-400 whitespace-nowrap ml-2">${time}</span>
-            `;
-            container.prepend(item);
-
-            if (container.children.length > 3) {
-                container.lastElementChild.remove();
+            // Si está vacío, mostramos el mensaje por defecto
+            if (historialAlertas.length === 0) {
+                container.innerHTML = `<div class="text-center text-gray-400 text-sm py-4 italic" id="history-empty">${trans('history.empty')}</div>`;
+                return;
             }
+
+            // Recorremos los mensajes guardados y los pintamos en el idioma seleccionado
+            historialAlertas.forEach(item => {
+                const info = item.payload.alert.info.find(i => i.language === idiomaActual) || item.payload.alert.info[0];
+                
+                let colorClass = "border-l-emerald-500 bg-emerald-50";
+                if (info.severity === "Extreme") colorClass = "border-l-red-500 bg-red-50";
+                else if (info.severity === "Severe") colorClass = "border-l-orange-500 bg-orange-50";
+                else if (info.severity === "Moderate") colorClass = "border-l-purple-500 bg-purple-50";
+
+                const div = document.createElement("div");
+                div.className = `p-3 rounded-r-lg border-l-4 ${colorClass} text-sm flex justify-between items-center shadow-sm mb-2 slide-in`;
+                div.innerHTML = `
+                    <div>
+                        <p class="font-bold text-gray-800 uppercase leading-tight">${info.headline}</p>
+                        <p class="text-[10px] text-gray-500 mt-1">${info.senderName || 'Sistema'}</p>
+                    </div>
+                    <span class="text-xs font-mono text-gray-400 whitespace-nowrap ml-2">${item.time}</span>
+                `;
+                container.appendChild(div);
+            });
         }
 
-        function updateDashboard(info) {
+        function updateDashboard(info, status) {
             const body = document.getElementById("main-body");
             const card = document.getElementById("alert-card"); 
             const side = document.getElementById("alert-side-color");
             const iconBg = document.getElementById("alert-icon-bg");
             const badge = document.getElementById("alert-badge");
             
+            const banner = document.getElementById('banner-educativo');
+            const textoBanner = document.getElementById('texto-educativo');
+
+            if (status === "Test") {
+                if (textoBanner) textoBanner.innerText = trans('mode.educational');
+                if (banner) banner.classList.remove('hidden');
+            } else {
+                if (banner) banner.classList.add('hidden');
+            }
+
             document.getElementById("headline").innerText = info.headline;
             if (document.getElementById("sender")) document.getElementById("sender").innerText = info.senderName || "Autoridad Competente";
             if (document.getElementById("description")) document.getElementById("description").innerText = info.description || trans('details.empty');
 
-            body.classList.remove("bg-red-50", "bg-amber-50", "bg-[#e9e9e9]");
-            card.classList.remove("pulse-red", "border-red-500", "border-yellow-400", "border-emerald-500");
+            // --- 1. LIMPIEZA PROFUNDA DE TODOS LOS COLORES POSIBLES ---
+            body.classList.remove("bg-red-50", "bg-amber-50", "bg-orange-50", "bg-purple-50", "bg-[#e9e9e9]");
+            card.classList.remove("pulse-red", "pulse-orange", "pulse-purple", "border-red-500", "border-yellow-400", "border-orange-500", "border-purple-500", "border-emerald-500");
 
             const sev = info.severity;
             
-            if (sev === "Extreme" || sev === "Severe") {
+            // --- 2. ASIGNACIÓN DE COLORES POR SEVERIDAD ---
+            
+            // INCENDIO (Rojo)
+            if (sev === "Extreme") {
                 body.classList.add("bg-red-50");
                 card.classList.add("pulse-red", "border-red-500"); 
                 side.className = "w-full h-4 landscape:w-4 landscape:h-auto bg-red-600 transition-colors duration-500";
                 iconBg.className = "w-28 h-28 rounded-full bg-red-100 text-red-600 flex items-center justify-center shadow-inner transition-colors duration-500";
-                iconBg.innerHTML = info.headline.includes("FUEGO") || info.headline.includes("FIRE") || info.headline.includes("SUTEA") ? iconFire : iconAlert; 
+                iconBg.innerHTML = iconFire; 
                 badge.className = "px-3 py-1 rounded-full bg-red-600 text-white text-xs font-bold uppercase tracking-wider animate-pulse";
                 badge.innerText = trans('badge.danger') || 'PELIGRO';
             } 
+            // TERREMOTO (Naranja)
+            else if (sev === "Severe") {
+                body.classList.add("bg-orange-50");
+                card.classList.add("pulse-orange", "border-orange-500"); 
+                side.className = "w-full h-4 landscape:w-4 landscape:h-auto bg-orange-500 transition-colors duration-500";
+                iconBg.className = "w-28 h-28 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center shadow-inner transition-colors duration-500";
+                iconBg.innerHTML = iconAlert; 
+                badge.className = "px-3 py-1 rounded-full bg-orange-500 text-white text-xs font-bold uppercase tracking-wider animate-pulse";
+                badge.innerText = trans('badge.danger') || 'PELIGRO';
+            }
+            // CALIDAD DEL AIRE (Morado)
             else if (sev === "Moderate") {
-                body.classList.add("bg-amber-50");
-                card.classList.add("border-yellow-400");
-                side.className = "w-full h-4 landscape:w-4 landscape:h-auto bg-yellow-400 transition-colors duration-500";
-                iconBg.className = "w-28 h-28 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center shadow-inner transition-colors duration-500";
+                body.classList.add("bg-purple-50");
+                card.classList.add("pulse-purple", "border-purple-500");
+                side.className = "w-full h-4 landscape:w-4 landscape:h-auto bg-purple-500 transition-colors duration-500";
+                iconBg.className = "w-28 h-28 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center shadow-inner transition-colors duration-500";
                 iconBg.innerHTML = iconWarning; 
-                badge.className = "px-3 py-1 rounded-full bg-yellow-400 text-yellow-900 text-xs font-bold uppercase tracking-wider";
+                badge.className = "px-3 py-1 rounded-full bg-purple-500 text-white text-xs font-bold uppercase tracking-wider animate-pulse";
                 badge.innerText = trans('badge.alert') || 'ALERTA';
             } 
+            // ESTADO SEGURO (Verde)
             else {
                 body.classList.add("bg-[#e9e9e9]");
                 card.classList.add("border-emerald-500");
@@ -369,6 +418,7 @@ function t(key: string) {
                 badge.className = "px-3 py-1 rounded-full bg-emerald-500 text-white text-xs font-bold uppercase tracking-wider";
                 badge.innerText = trans('badge.safe') || 'SEGURO';
             }
+            
             actualizarVideoMascota(sev, info.headline || "");
         }
 
@@ -401,16 +451,20 @@ function t(key: string) {
 
        function onMessageArrived(message) {
             try {
-                // --- NUEVO --- Guardamos el payload para reutilizarlo al cambiar el idioma
                 ultimoPayload = JSON.parse(message.payloadString);
-                
-                // Usamos el idiomaActual dinámico
+                const status = ultimoPayload.alert?.status || "Actual";
                 const info = ultimoPayload.alert.info.find(i => i.language === idiomaActual) || ultimoPayload.alert.info[0];
                 
                 console.log("Alerta procesada en idioma:", info.language);
                 
-                addToHistory(info);
-                updateDashboard(info);
+                // Guardamos el payload entero y la hora exacta
+                const hora = new Date().toLocaleTimeString('es-ES', {hour: '2-digit', minute:'2-digit'});
+                historialAlertas.unshift({ payload: ultimoPayload, time: hora }); // Añade al principio
+                if (historialAlertas.length > 3) historialAlertas.pop(); // Mantiene solo los últimos 3
+                
+                // Llamamos a las funciones actualizadas
+                renderHistory();
+                updateDashboard(info, status);
                 
             } catch (e) {
                 console.error("Error al procesar el JSON de la alerta:", e);
@@ -481,6 +535,7 @@ function t(key: string) {
                     const info = ultimoPayload.alert.info.find(i => i.language === idiomaActual) || ultimoPayload.alert.info[0];
                     updateDashboard(info);
                 }
+                renderHistory();
             }
         });
     </script>
